@@ -9,12 +9,12 @@
       "name": "Piter"
     }
   ],
-    "user": [
-        {
-            "id":"0",
-            "firstName":"Andrew",
-            "lastName":"Baranov",
-            "status":false,
-        }
-    ]
+  "user": [
+    {
+      "id": "0",
+      "firstName": "Andrew",
+      "lastName": "Baranov",
+      "status": false
+    }
+  ]
 }

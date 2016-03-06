@@ -1,8 +1,9 @@
-function route(handle, pathname, response){
+function route(handle, pathname, response, postData){
     //console.log("From route.js a request for "+ pathname);
     
     if (typeof handle[pathname] === 'function')
         {
+            //return handle[pathname](response, postData);
             return handle[pathname](response);
         } else
             {

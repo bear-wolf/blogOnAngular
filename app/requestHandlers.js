@@ -2,30 +2,30 @@ var exec = require("child_process").exec;
 
 function start(response){
     console.log("Request handler 'start' was called.");
-    
-//    function sleep(milliSeconds) {
-//        var startTime = new Date().getTime();
-//        while (new Date().getTime() < startTime + milliSeconds);
-//      }
-//    sleep(10000);
-    
-//     exec("ls -lah", function (error, stdout, stderr) {
-//          response.writeHead(200, {"Content-Type": "text/plain"});
-//          response.write(stdout);
-//          response.end();
-//      });   
-     exec("find /", { timeout: 10000, maxBuffer: 20000*1024 },
-    function (error, stdout, stderr) {
-      response.writeHead(200, {"Content-Type": "text/plain"});
-      response.write(stdout);
-      response.end();
-    });
+   
+    var body = '<html>'+
+    '<head>'+
+    '<meta http-equiv="Content-Type" content="text/html; '+
+    'charset=UTF-8" />'+
+    '</head>'+
+    '<body>'+
+    '<form action="/upload" method="post">'+
+    '<textarea name="text" rows="20" cols="60"></textarea> <br>'+
+    '<input type="submit" value="Submit text" />'+
+    '</form>'+
+    '</body>'+
+    '</html>';
+
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("Text for a main page");
+    response.end();
 }
 
 function upload(response){
     console.log('Request handler "upload" was called.');
     response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("Upload");
+    //response.write("You've sent: " + postData);
+    response.write("You've sent: ");
     response.end();
 }
 

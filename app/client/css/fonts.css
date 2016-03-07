@@ -1,0 +1,8 @@
+@font-face {
+    font-family: ;
+	src: url("../fonts/.eot");
+	src: url("../fonts/.svg") format('svg'),
+		url("../fonts/.ttf") format('truetype'),		
+		url("../fonts/.otf") format("opentype"),
+		url("../fonts/.woff") format("woff");
+   }

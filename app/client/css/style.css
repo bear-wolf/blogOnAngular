@@ -1,0 +1,75 @@
+@import "normalize.css";
+@import "bootstrap.min.css";
+@import "magnific-popup.css";
+@import "fonts.css";
+@import "template.css";
+
+html,
+body{
+    height: 100%;
+    display: block;    
+}
+body {
+    background:#f5f5f5;
+}
+
+a:link,
+a:visited{
+    color: #546A67;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body > .container-fluid.main{
+    min-height: 100%;    
+    padding-top: 52px;
+}
+
+
+/*nav*/
+nav{
+    background-color: #315176;
+}
+.navbar-nav{ text-align: center; float: none;}
+.navbar-nav>li{ display: inline-block; float: none; width: 16%;}
+.navbar-nav>li>a{
+    font-family:Exo-Regular;
+    padding: 0;
+    display: inline-block;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    line-height: 52px;    
+}
+.nav>li>a:focus,
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: transparent;
+}
+.navbar-collapse{ height: 52px;}
+/*nav===========*/
+
+
+.cd-top {
+    display: block;
+    margin: 0 auto;
+    height: 57px;
+    width:116px;   
+    background: url(../images/up-top.png) no-repeat;    
+    opacity: 1;    
+}
+.cd-top:hover{
+    background-position: left bottom;
+}
+
+.cd-top.cd-is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  opacity: .5;
+}
+
+header{
+    min-height: 712px;    
+}

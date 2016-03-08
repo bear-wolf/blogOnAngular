@@ -1,24 +1,29 @@
 {
-  "name": "blog",
+  "name": "bearwolf",
   "version": "1.0.0",
-  "description": "The simple site",
+  "description": "This is a simple site",
   "main": "app/index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {},
-  "devDependencies": {
-    "angular": "^1.5.0",
-    "bootstrap": "^3.3.6"
-  },
+  "devDependencies": {      
+  },    
   "scripts": {
-    "test": "echo test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+    
   "repository": {
     "type": "git",
     "url": "git+https://bear-wolf@github.com/bear-wolf/blogOnAngular.git"
   },
-  "author": "bearwolf",
+  "keywords": [
+    "on",
+    "angular",
+    "with",
+    "node.js"
+  ],
+  "author": "bear-wolf@ukr.net",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bear-wolf/blogOnAngular/issues"

@@ -1,8 +1,6 @@
 var exec = require("child_process").exec;
 
-function start(response){
-    console.log("Request handler 'start' was called.");
-   
+function start(response){       
     var body = '<html>'+
     '<head>'+
     '<meta http-equiv="Content-Type" content="text/html; '+
@@ -16,17 +14,14 @@ function start(response){
     '</body>'+
     '</html>';
 
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write("Text for a main page");
-    response.end();
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write(body, function(){ response.end(); });    
 }
 
-function upload(response){
-    console.log('Request handler "upload" was called.');
-    //response.writeHead(200, {"Content-Type": "text/plain"});
+function upload(response){    
+    var content = "upload page";    
     //response.write("You've sent: " + postData);
-    response.write("You've sent: ");
-    response.end();
+    response.write(content, function(){ response.end()});    
 }
 
 exports.start = start;

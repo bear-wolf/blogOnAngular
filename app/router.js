@@ -1,9 +1,9 @@
-function route(handle, pathname, response, postData){        
+function route(handle, pathname, response, request){            
     if (typeof handle[pathname] === 'function')
         {
             console.log("Url:" + pathname + " Status 200");                
             response.writeHead(200, {"Content-Type": "text/html"});
-            handle[pathname](response, postData);                        
+            handle[pathname](response, request);                        
         } else
             {
                 console.log("Url:" + pathname + " Not found. Status 404");                

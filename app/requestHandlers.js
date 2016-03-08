@@ -1,4 +1,5 @@
-var exec = require("child_process").exec;
+//var exec = require("child_process").exec;
+var querystring = require("querystring");
 
 function start(response){       
     var body = '<html>'+
@@ -13,14 +14,13 @@ function start(response){
     '</form>'+
     '</body>'+
     '</html>';
-
-    response.writeHead(200, {"Content-Type": "text/plain"});
+    
     response.write(body, function(){ response.end(); });    
 }
 
-function upload(response){    
-    var content = "upload page";    
-    //response.write("You've sent: " + postData);
+function upload(response, postData){    
+    //var content = "You've sent: "+postData;    
+    var content = "You've sent the text: " + querystring.parse(postData).text;
     response.write(content, function(){ response.end()});    
 }
 

@@ -2,6 +2,7 @@ function route(handle, pathname, response, postData){
     if (typeof handle[pathname] === 'function')
         {
             console.log("Url:" + pathname + " Status 200");                
+            response.writeHead(200, {"Content-Type": "text/html"});
             handle[pathname](response, postData);                        
         } else
             {

@@ -32,14 +32,14 @@ var file ={
         './bower_components/angular-route/angular-route.min.js'
     ],
     css: [
-            './create/css/normalize.css',
+            './.create/css/normalize.css',
             './bower_components/bootstrap/dist/css/bootstrap.min.css',
             './bower_components/jquery-ui/themes/start/jquery-ui.min.css',
             './bower_components/growl/stylesheets/jquery.growl.css',
-            './create/css/fonts.css',
-            './create/css/template.css',
-            './create/css/style.css',
-            './create/css/media.css']    
+            './.create/css/fonts.css',
+            './.create/css/template.css',
+            './.create/css/style.css',
+            './.create/css/media.css']    
 } 
 
 var path = {

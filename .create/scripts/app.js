@@ -2,23 +2,23 @@
 
 
 //var resouce = require('./angular-resource');
-//'ngRoute', 'ngResource', 'appControllers'
+//'', 'ngResource', 'appControllers'
 
-angular.module('appSite',['globalModule'])
-    //.config(['$routeProvider',function($routeProvider) {
-      //  console.log("Configuration appSite");
-//        $routeProvider.when('/', {
-//            templateUrl: './partials/main.html',
-//            controller: 'mainCtrl'
-//          }).
-//          otherwise({
-//            redirectTo: '/'
-//          });
-    //}])
+angular.module('appSite',['ngRoute','globalModule','adminModule'])
+    .config(['$routeProvider',function($routeProvider) {
+        console.log("Configuration appSite");
+        $routeProvider.when('/', {
+            templateUrl: './partials/main.html',
+            controller: 'AdminCtrl'
+          }).
+          otherwise({
+            redirectTo: '/'
+          });
+    }])
     .run([function(){
         console.log("Run appSite");
     }])
-    .controller('MainCtrl',['$scope',function($scope){
-        console.log("MainCtrl:: running ");
-        $scope.text = "hello";
-    }]);
+//    .controller('MainCtrl',['$scope',function($scope){
+//        console.log("MainCtrl:: running ");
+//        $scope.text = "hello";
+//    }]);

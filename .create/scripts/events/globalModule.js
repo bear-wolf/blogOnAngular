@@ -9,7 +9,7 @@
     }])
     .controller('MainCtrl',['$scope',function($scope){
         console.log("MainCtrl from globalModule:: running");
-        $scope.text = "Hello world from global Module";
+        $scope.title = "Admin panel";
     }]);
     
 })(window.angular);

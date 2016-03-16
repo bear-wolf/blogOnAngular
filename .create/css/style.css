@@ -1,0 +1,9 @@
+
+
+header .title{
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 50px;
+}

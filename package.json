@@ -1,0 +1,35 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "The simple site",
+  "main": "start.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.6",
+    "bower": "^1.7.7",
+    "browser-sync": "^2.11.1",
+    "formidable": "^1.0.17",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-sequence": "^0.4.5",
+    "node-inspector": "^0.12.7"
+  },
+  "scripts": {
+    "test": "echo test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bear-wolf@github.com/bear-wolf/blogOnAngular.git"
+  },
+  "author": "bearwolf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bear-wolf/blogOnAngular/issues"
+  },
+  "homepage": "https://github.com/bear-wolf/blogOnAngular#readme"
+}

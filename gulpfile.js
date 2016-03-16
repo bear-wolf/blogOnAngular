@@ -12,7 +12,7 @@ var concatConfig = {
 
 var config = {
     server: {
-        baseDir: "./create"
+        baseDir: "./.create"
     },
     // tunnel: true,
     host: 'localhost',
@@ -53,26 +53,26 @@ var path = {
         fonts: '.production/fonts/'        
     },
     create: { //Пути откуда брать исходники
-        html: './create/*.html',
-        js: './create/scripts/scripts.js',//В стилях и скриптах нам понадобятся только main файлы        
-        css: './create/css/**/*.css',
-        style: './create/style/**/*.css',
-        libs: './create/libraries/**/*.*',
-        outLib: './create/libraries/',
-        img: './create/images/**/*.*',      
-        uploads: './create/uploads/**/*.*',      
-        fonts: './create/fonts/**/*.*',
-        tmp: './create/tmp/**/*.css'
+        html: './.create/*.html',
+        js: './.create/scripts/scripts.js',//В стилях и скриптах нам понадобятся только main файлы        
+        css: './.create/css/**/*.css',
+        style: './.create/style/**/*.css',
+        libs: './.create/libraries/**/*.*',
+        outLib: './.create/libraries/',
+        img: './.create/images/**/*.*',      
+        uploads: './.create/uploads/**/*.*',      
+        fonts: './.create/fonts/**/*.*',
+        tmp: './.create/tmp/**/*.css'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
-        html: 'create/**/*.html',
-        js: 'create/js/**/*.js',
-        css: 'create/css/**/*.css',
-        style: 'create/style/**/*.css',
-        image: 'create/images/**/*.*',
-        uploads: 'create/uploads/**/*.*',      
-        libs: 'create/libraries/**/*.*',
-        fonts: 'create/fonts/**/*.*'      
+        html: './.create/**/*.html',
+        js: './.create/js/**/*.js',
+        css: './.create/css/**/*.css',
+        style: './.create/style/**/*.css',
+        image: './.create/images/**/*.*',
+        uploads: './.create/uploads/**/*.*',      
+        libs: './.create/libraries/**/*.*',
+        fonts: './.create/fonts/**/*.*'      
     },
     clean: './.production'
 };

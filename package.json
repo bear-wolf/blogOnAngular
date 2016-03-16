@@ -17,6 +17,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-minify-css": "^1.2.4",
     "gulp-sequence": "^0.4.5",
+    "gulp-watch": "^4.3.5",
     "node-inspector": "^0.12.7"
   },
   "scripts": {

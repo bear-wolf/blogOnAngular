@@ -9,7 +9,12 @@
     }])
     .controller('MainCtrl',['$scope',function($scope){
         console.log("MainCtrl from globalModule:: running");
-        $scope.title = "Admin panel";
+        var model = {
+            title : "Admin panel",       
+            tables : ['albums','todos','posts']
+        };
+                
+        $scope.model = model;
     }]);
     
 })(window.angular);

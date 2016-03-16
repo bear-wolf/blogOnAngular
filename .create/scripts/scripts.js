@@ -1,13 +1,15 @@
 
 $(function(){    
     Browser.init();
-    Site.Init();     
-
+    Site.init();     
 });
 
+$(window).load(function(){
+    $( "#tabs" ).tabs();
+})
+
 var Site = new function () {
-    this.Init = function(){
-        
+    this.init = function(){        
     };
 };
 

@@ -1,15 +1,22 @@
-(function(angular){
+(function(angular){    
     
-    angular.module('adminModule',[])
+    angular.module('adminModule',['ngResource', 'servicesModule'])
     .config([function(){
         console.log("Admin Module:: config");
     }])
     .run([function(){
         console.log("Admin Module:: running");
     }])
-    .controller('AdminCtrl',['$scope',function($scope){
+    .controller('AdminCtrl',['$scope','UserService',function($scope, UserService){
         console.log("AdminCtrl from adminModule:: running");
-        $scope.text = "Hello world from global Module";
-    }]);
+        
+        var model = {};
+        
+        $scope.setItem = function(item){
+            model.data = UserService.get();
+            
+            $scope.model = model;
+        };
+    }])
     
 })(window.angular);

@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     cssmin = require('gulp-minify-css'),
+    watch = require('gulp-watch'),
     concat = require('gulp-concat'),
     gulpSequence = require('gulp-sequence'),
     browserSync = require("browser-sync"),
@@ -66,7 +67,7 @@ var path = {
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
         html: './.create/**/*.html',
-        js: './.create/js/**/*.js',
+        js: './.create/scripts/**/*.js',
         css: './.create/css/**/*.css',
         style: './.create/style/**/*.css',
         image: './.create/images/**/*.*',
@@ -91,11 +92,11 @@ gulp.task('css-build', function () {
         .pipe(reload({stream: true}));  
 });
 
-gulp.task('css:build',function(callback){
+gulp.task('css',function(callback){
     gulpSequence('css-concat','css-build', callback);
 })
 
-gulp.task('js:set', function () {    
+gulp.task('js', function () {    
 //    var str = "";
 //    for (var i=0; i<fileToSite.js.length; i++ )
 //        {
@@ -114,4 +115,23 @@ gulp.task('webserver', function () {
     browserSync(config);
 });
 
-gulp.task('default', ['webserver', 'css:build', 'js:set']);
+
+gulp.task('watch', function(){  
+    watch([path.watch.css], function(event, cb) {
+        gulp.start('css');
+    });   
+    watch([path.watch.js], function(event, cb) {
+        gulp.start('js');
+    });
+//    watch([path.watch.image], function(event, cb) {
+//        gulp.start('image');
+//    });
+//    watch([path.watch.uploads], function(event, cb) {
+//        gulp.start('uploads:build');
+//    });
+//    watch([path.watch.fonts], function(event, cb) {
+//        gulp.start('fonts:build');
+//    });    
+});
+
+gulp.task('default', ['webserver', 'watch', 'css', 'js']);

@@ -7,15 +7,15 @@
     .run([function(){
         console.log("Admin Module:: running");
     }])
-    .controller('AdminCtrl',['$scope','UserService',function($scope, UserService){
+    .controller('AdminCtrl',['$scope','userService',function($scope, userService){
         console.log("AdminCtrl from adminModule:: running");
-        
-        var model = {};
-        
+                
         $scope.setItem = function(item){
-            model.data = UserService.get();
-            
-            $scope.model = model;
+            location.hash = item;
+            location.reload;
+//            userService.get().then(function(data){
+//                $scope.model.user = data;
+//            });                        
         };
     }])
     

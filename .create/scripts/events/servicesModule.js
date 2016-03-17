@@ -9,15 +9,18 @@
     .run([function(){
         console.log("Service Module:: running");
     }])
-    .service('UserService',['$resource', function($resource){       
+    .service('userService',['$http', '$q', function($http, $q){       
         this.get = function(){
-             return $resource(url+'users/:Id.json', {}, {
-                query: {
-                    method:'GET', 
-                    //params:{ phoneId:'phones' },
-                    isArray:true
-                   }
-            }); 
+             var deferred = $q.defer();
+             $http({method: 'GET', url: url+'users'})
+                 .success(function(data, status, headers, config) {
+                    deferred.resolve(data);
+                 })
+                 .error(function(data, status, headers, config) {
+                    deferred.reject(status);
+                });
+            
+            return deferred.promise;
         }
     }]);
     

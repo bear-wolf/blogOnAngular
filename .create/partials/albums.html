@@ -1,0 +1,27 @@
+ <section class="row section" data-ng-show="model.user == undefined">            
+                <div class="container">                   
+                     <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <td>firstName</td>
+                                <td>username</td>
+                                <td>website</td>
+                                <td>email</td>
+                                <td>phone</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="item in model.user">
+                                <th>{{$index+1}}</th>
+                                <td>{{item.name}}</td>
+                                <td>{{item.username}}</td>
+                                <td>{{item.website}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.phone}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>            
+        </section> 
+      

@@ -1,6 +1,8 @@
 var gulp = require('gulp'),
     cssmin = require('gulp-minify-css'),
     watch = require('gulp-watch'),
+	pngquant = require('imagemin-pngquant'),
+	imagemin = require('gulp-imagemin'),
     concat = require('gulp-concat'),
     gulpSequence = require('gulp-sequence'),
     browserSync = require("browser-sync"),
@@ -13,7 +15,7 @@ var concatConfig = {
 
 var config = {
     server: {
-        baseDir: "./.create"
+        baseDir: "./.production"
     },
     // tunnel: true,
     host: 'localhost',
@@ -45,38 +47,73 @@ var file ={
 
 var path = {
     production: { //Тут мы укажем куда складывать готовые после сборки файлы
-        html: '.production/',
-        js: '.production/scripts/',
-        image: '.production/images/',
-        uploads: '.production/uploads/',
-        style: '.production/style/',
-        libs: '.production/libraries/',
-        fonts: '.production/fonts/'        
+        html: './.production/',
+        scripts: './.production/scripts/',
+        image: './.production/images/',
+        uploads: './.production/uploads/',
+        style: './.production/style/',
+		partials: './.production/partials/',
+        libs: './.production/libraries/',
+        fonts: './.production/fonts/'        
     },
     create: { //Пути откуда брать исходники
         html: './.create/*.html',
-        js: './.create/scripts/scripts.js',//В стилях и скриптах нам понадобятся только main файлы        
+        scripts: './.create/scripts/**/*.js', 
         css: './.create/css/**/*.css',
         style: './.create/style/**/*.css',
         libs: './.create/libraries/**/*.*',
         outLib: './.create/libraries/',
-        img: './.create/images/**/*.*',      
+        img: './.create/images/**/*.*',     
+		partials: './.create/partials/**/*.*',
         uploads: './.create/uploads/**/*.*',      
         fonts: './.create/fonts/**/*.*',
         tmp: './.create/tmp/**/*.css'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
         html: './.create/**/*.html',
-        js: './.create/scripts/**/*.js',
+        scripts: './.create/scripts/**/*.js',
         css: './.create/css/**/*.css',
         style: './.create/style/**/*.css',
         image: './.create/images/**/*.*',
+		partials: './.create/partials/**/*.*',
         uploads: './.create/uploads/**/*.*',      
         libs: './.create/libraries/**/*.*',
         fonts: './.create/fonts/**/*.*'      
     },
     clean: './.production'
 };
+
+gulp.task('html:build', function () {
+    gulp.src(path.create.html) 
+        .pipe(gulp.dest(path.production.html))
+        .pipe(reload({stream: true}));
+});
+
+gulp.task('scripts', function () {
+    gulp.src(path.create.scripts) 
+        .pipe(gulp.dest(path.production.scripts))
+        .pipe(reload({stream: true}));
+});
+
+gulp.task('partials', function () {
+    gulp.src(path.create.partials) 
+        .pipe(gulp.dest(path.production.partials))
+        .pipe(reload({stream: true}));
+});
+
+//gulp.task('image', function () {
+//    gulp.src(path.create.img) //Выберем наши картинки
+//        .pipe(imagemin({ progressive: true, svgoPlugins: [{removeViewBox: false}], interlaced: true }))
+//        .pipe(gulp.dest(path.production.img)) //И бросим в production       
+//});
+
+
+//gulp.task('js:build', function () {
+//    gulp.src(path.create.libs) //Найдем наш main файл        
+//        //.pipe(uglify().on('error', gutil.log))        
+//        .pipe(gulp.dest(path.production.libs)) //Выплюнем готовый файл в production 
+//        .pipe(reload({stream: true}));     
+//});
 
 gulp.task('css-concat', function () {         
     return gulp.src([file.css[0], file.css[1], file.css[2], file.css[3], file.css[4], file.css[5], file.css[5], file.css[6]])
@@ -96,7 +133,13 @@ gulp.task('css',function(callback){
     gulpSequence('css-concat','css-build', callback);
 })
 
-gulp.task('js', function () {    
+gulp.task('fonts:build', function () {
+    gulp.src(path.create.fonts) 
+        .pipe(gulp.dest(path.production.fonts)) 
+});
+
+
+gulp.task('libs', function () {    
 //    var str = "";
 //    for (var i=0; i<fileToSite.js.length; i++ )
 //        {
@@ -115,6 +158,20 @@ gulp.task('webserver', function () {
     browserSync(config);
 });
 
+gulp.task('uploads', function () {
+    gulp.src(path.create.uploads)
+        .pipe(imagemin({ progressive: true, svgoPlugins: [{removeViewBox: false}],use: [pngquant()], interlaced: true}))
+        .pipe(gulp.dest(path.production.uploads))
+});
+
+gulp.task('build', [
+    'html:build',         
+    'uploads',
+    'fonts:build',
+	'scripts',
+	'partials'
+]);
+
 
 gulp.task('watch', function(){  
     watch([path.watch.css], function(event, cb) {
@@ -123,9 +180,9 @@ gulp.task('watch', function(){
     watch([path.watch.js], function(event, cb) {
         gulp.start('js');
     });
-//    watch([path.watch.image], function(event, cb) {
-//        gulp.start('image');
-//    });
+    watch([path.watch.scripts], function(event, cb) {
+        gulp.start('scripts');
+    });
 //    watch([path.watch.uploads], function(event, cb) {
 //        gulp.start('uploads:build');
 //    });
@@ -134,4 +191,4 @@ gulp.task('watch', function(){
 //    });    
 });
 
-gulp.task('default', ['webserver', 'watch', 'css', 'js']);
+gulp.task('default', ['build', 'webserver', 'watch', 'css', 'libs']);

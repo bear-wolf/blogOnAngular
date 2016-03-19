@@ -9,14 +9,15 @@ angular.module('appSite',['ngRoute', 'ngResource', 'globalModule', 'adminModule'
         console.log("Configuration appSite");
         $routeProvider
           .when('/', { templateUrl: './partials/main.html',controller: 'AdminCtrl'})
-          .when('/albums', {templateUrl: './partials/albums.html', controller: 'AdminCtrl'})
+          .when('/albums', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
+          .when('/comments', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
+          .when('/photos', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
+          .when('/posts', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
+          .when('/todos', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
+          .when('/users', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
           .otherwise({redirectTo: '/'});
         $locationProvider.html5Mode(true);
     }])
     .run([function(){
         console.log("Run appSite");
     }])
-//    .controller('MainCtrl',['$scope',function($scope){
-//        console.log("MainCtrl:: running ");
-//        $scope.text = "hello";
-//    }]);

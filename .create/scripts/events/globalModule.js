@@ -11,7 +11,12 @@
         console.log("MainCtrl from globalModule:: running");
         var model = {
             title : "Admin panel",       
-            tables : ['albums','todos','posts']
+            tables : ['albums',
+                      'comments',
+//                      'photos',
+//                      'posts', 
+//                      'todos',
+                      'users']
         };
                 
         $scope.model = model;

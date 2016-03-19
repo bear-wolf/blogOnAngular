@@ -176,16 +176,13 @@ gulp.task('build', [
 gulp.task('watch', function(){  
     watch([path.watch.css], function(event, cb) {
         gulp.start('css');
-    });   
-    watch([path.watch.js], function(event, cb) {
-        gulp.start('js');
-    });
+    });       
     watch([path.watch.scripts], function(event, cb) {
         gulp.start('scripts');
     });
-//    watch([path.watch.uploads], function(event, cb) {
-//        gulp.start('uploads:build');
-//    });
+    watch([path.watch.partials], function(event, cb) {
+        gulp.start('partials');
+    });
 //    watch([path.watch.fonts], function(event, cb) {
 //        gulp.start('fonts:build');
 //    });    

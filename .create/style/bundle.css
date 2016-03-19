@@ -269,12 +269,25 @@ input:-ms-input-placeholder {text-overflow:ellipsis;}
     right: 5px;
     top: 5px;
 }
-header .title{
+.title{
     text-align: center;
     border: 1px solid #ccc;
-    font-size: 20px;
     text-transform: uppercase;
     line-height: 50px;
+}
+
+header .title{
+    font-size: 20px;
+}
+
+.section .title{
+    font-size: 18px;
+}
+
+.title.small{
+    font-size: 17px;
+    border: none;
+    text-transform: none;
 }
 
 div.tabs {
@@ -336,4 +349,33 @@ margin-top: 0;
 
 .ui-tabs .ui-tabs-nav{
     height: 43px;
+}
+
+.text-empty {
+    border: 1px solid #ddd;
+    background: #fff;
+    line-height: 45px;
+    height: 45px;
+    padding-left: 16px;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    font-family: Tahoma;
+}
+
+.authorization{
+    float: right;
+    max-width: 220px;
+    width: 100%;
+}
+.authorization li{ padding-bottom: 10px;}
+
+.disable{ display: none;}
+
+.authorization .successfully{ display: none;}
+.authorization .active{ display: block;}
+
+.page-login .authorization{
+    float: none;
+    margin: 0 auto;
 }

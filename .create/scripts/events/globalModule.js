@@ -20,6 +20,11 @@
         };
                 
         $scope.model = model;
-    }]);
+    }])
+    .directive("authorization", function(){
+        return{
+            templateUrl: 'partials/authorization.html'
+        }
+    });
     
 })(window.angular);

@@ -46,8 +46,7 @@
     .directive("navtmpl", function(){
        return {        
            templateUrl: 'partials/nav.html',        
-            link: function($scope, element, attributes) {                        
-//                element.find('.dataIsEmpty').data("ng-show='"+$scope.modelIsEmpty+"'");            
+            link: function($scope, element, attributes) {
             }
         }
     });

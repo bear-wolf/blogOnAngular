@@ -22,19 +22,19 @@
         switch (entity)
             {
                 case "albums": { 
-                    entityService.albumsGet().then(function(data){ 
+                    entityService.albums.get().then(function(data){ 
                         $scope.albums = data;
                     });           
                     break;
                 }
                 case "comments": { 
-                    entityService.commentsGet().then(function(data){ 
+                    entityService.comments.get().then(function(data){ 
                         $scope.comments = data;
                     });           
                     break;
                 }                    
                 case "users": { 
-                   entityService.usersGet().then(function(data){ 
+                   entityService.users.get().then(function(data){ 
                         $scope.users = data;
                     });  
                     break;

@@ -1,10 +1,12 @@
 
-<div class="authorization">
-    <ul>
-        <li><input type="text" class="text-empty" placeholder="Введіть ім'я"></li>
-        <li><input type="password" class="text-empty" placeholder="Введіть пароль"></li>
-        <li><input type="submit" class="btn btn-primary" value="Вхід"></li>
-    </ul>        
+<div class="authorization" data-ng-controller="authorizationCtrl">
+   <form ng-submit="submit()">
+        <ul>
+            <li><input type="text" class="text-empty" ng-model="username" required placeholder="Введіть ім'я"></li>
+            <li><input type="password" class="text-empty" ng-model="password" required placeholder="Введіть пароль"></li>
+            <li><input type="submit" class="btn btn-primary" value="Вхід"></li>
+        </ul>
+    </form>        
     
     <div class="successfully">Добрий день {{user.name}}</div>
     

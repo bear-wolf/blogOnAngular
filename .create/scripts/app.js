@@ -20,6 +20,7 @@ angular.module('appSite',['ngRoute', 'ngResource', 'globalModule', 'adminModule'
         
         $location.html5Mode(true);
         $httpProvider.interceptors.push('TokenInterceptor');        
+        //$httpProvider.interceptors.push('tokenInjector');
     }])
     .run(['$rootScope', '$location', '$window', 'AuthenticationService', function($rootScope, $location,  $window, AuthenticationService){
         console.log("Run appSite");

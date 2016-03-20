@@ -1,6 +1,9 @@
 (function(angular){
     
-    var url = "http://localhost:3000/";
+    var valueConst ={
+              client: "http://localhost:9000/",
+              server: "http://localhost:3000/"
+          }
     
     angular.module('servicesModule',['ngResource'])
     .config([function(){
@@ -9,12 +12,18 @@
     .run([function(){
         console.log("Service Module:: running");
     }])
+//    .constant('PATH', {
+//      url:{
+//              server: "http://localhost:9000/",
+//              client: "http://localhost:3000/"
+//          }
+//    })
     .service('entityService',['$http', '$q', function($http, $q){       
         return {
             users: {
                 get : function(){
                      var deferred = $q.defer();
-                     $http({method: 'GET', url: url+'users'})
+                     $http({method: 'GET', url: valueConst.server+'users'})
                          .success(function(data, status, headers, config) {
                             deferred.resolve(data);
                          })
@@ -26,7 +35,7 @@
                 },
                 getID:  function(id){
                      var deferred = $q.defer();
-                     $http({method: 'GET', url: url+'users/:id'})
+                     $http({method: 'GET', url: valueConst.server+'users/:id'})
                          .success(function(data, status, headers, config) {
                             deferred.resolve(data);
                          })
@@ -40,7 +49,7 @@
             albums:{
                 get: function(){
                      var deferred = $q.defer();
-                     $http({method: 'GET', url: url+'albums'})
+                     $http({method: 'GET', url: valueConst.server+'albums'})
                          .success(function(data, status, headers, config) { deferred.resolve(data);})
                          .error(function(data, status, headers, config) { deferred.reject(status);});
 
@@ -50,13 +59,29 @@
             comments:{
                 get: function(){
                      var deferred = $q.defer();
-                     $http({method: 'GET', url: url+'comments'})
+                     $http({method: 'GET', url: valueConst.server+'comments'})
                          .success(function(data, status, headers, config) { deferred.resolve(data);})
                          .error(function(data, status, headers, config) { deferred.reject(status);});
 
                     return deferred.promise;
                 }
             }
+        }    
+    }])
+    .service('сredentialsService',['$http', '$q', function($http, $q){       
+        return {            
+            verify : function(){
+                 var deferred = $q.defer();
+                 $http({method: 'GET', url: valueConst.server +'users'})
+                     .success(function(data, status, headers, config) {
+                        deferred.resolve(data);
+                     })
+                     .error(function(data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+
+                return deferred.promise;
+            }            
         }    
     }])
     .factory('AuthenticationService',[ function() {

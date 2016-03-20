@@ -1,4 +1,5 @@
 (function(angular){
+    'use strict';
     
     angular.module('globalModule',[])
     .config([function(){
@@ -20,6 +21,40 @@
         };
                 
         $scope.model = model;
+    }])
+    .controller('authorizationCtrl', [ '$scope', '$http', function($scope, $http){        
+        var _this = this;
+        $scope.isAuthenticated = false;
+        $scope.submit = function() {
+            debugger;
+          return $http
+            .post('Page on localhost:3000', {
+              username: _this.username,
+              password: _this.password
+            })
+            .then(function(response) {
+                _this.isAuthenticated = true;
+                  localStorage['token'] = response.data.token;
+                  alert('Login successful');
+                }, function() {
+                  _this.isAuthenticated = false	;
+                  alert('Login fail');
+                });
+        }
+        $scope.fetch = function() {
+          return $http
+            .post('Page on localhost:3000')
+            .then(function() {
+              alert('Fetch resource successful');
+            }, function() {
+              alert('Can not fetch resource');
+            });
+        
+        $scope.submit = function(){
+//          console.log("submit");            
+            сredentialsService.verify($scope.username, $scope.password);
+        };
+    }
     }])
     .directive("authorization", function(){
         return{

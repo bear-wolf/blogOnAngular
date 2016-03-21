@@ -86,11 +86,21 @@
     }])
     .factory('AuthenticationService',[ function() {
         var auth = {
-            isAuthenticated: false,
-            isAdmin: false
+            isLogged: false
         }
-        
+ 
         return auth;
+    }])
+    .factory('UserService',[ '$http', function($http) {
+        return {
+            logIn: function(username, password) {
+                return $http.post(valueConst.server + 'login', {username: username, password: password});
+                //return $http.post(valueConst.client + 'index.js', { username: username, password: password});
+            },
+            logOut: function() {
+
+            }
+        }
     }])
     .factory('TokenInterceptor', ['$q', '$window', '$location', 'AuthenticationService', function ($q, $window, $location, AuthenticationService) {
         return {

@@ -27,14 +27,21 @@
         var _this = this;
         $scope.isAuthenticated = false;
         
+	   if (AuthenticationService.isLogged) {
+			$scope.isAuthenticated = true;
+		}
+		   
         //Admin User Controller (login, logout)
-        $scope.logIn = function logIn(username, password) {
-            if (username !== undefined && password !== undefined) {
+        $scope.logIn = function logIn(username, email) {
+            if (username !== undefined && email !== undefined) {
  
-                UserService.logIn(username, password).success(function(data) {
-                    AuthenticationService.isLogged = true;
-                    $window.sessionStorage.token = data.token;
-                    $location.path("/");
+                UserService.logIn(username, email).success(function(data) {
+					if (data.length!=0)
+						{
+							AuthenticationService.isLogged = true;
+							$window.sessionStorage.token = data.token;
+							$location.path("/");
+						}
                 }).error(function(status, data) {
                     console.log(status);
                     console.log(data);

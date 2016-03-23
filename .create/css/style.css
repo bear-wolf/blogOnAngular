@@ -96,13 +96,15 @@ margin-top: 0;
     float: right;
     max-width: 220px;
     width: 100%;
+	position: relative;
+	z-index: 50;
 }
 .authorization li{ padding-bottom: 10px;}
 
 .disable{ display: none;}
 
-.authorization .successfully{ display: none;}
 .authorization .active{ display: block;}
+.authorization .successfully{ display: none; }
 
 .page-login .authorization{
     float: none;

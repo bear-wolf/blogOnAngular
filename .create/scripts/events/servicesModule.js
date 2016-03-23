@@ -93,9 +93,8 @@
     }])
     .factory('UserService',[ '$http', function($http) {
         return {
-            logIn: function(username, password) {
-                return $http.post(valueConst.server + 'login', {username: username, password: password});
-                //return $http.post(valueConst.client + 'index.js', { username: username, password: password});
+            logIn: function(username, email) {
+                return $http.get(valueConst.server + 'users?username='+username+"&email="+email);								
             },
             logOut: function() {
 

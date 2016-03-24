@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     gulpSequence = require('gulp-sequence'),
     browserSync = require("browser-sync"),
+    jsonServer = require("gulp-json-srv"),
     reload = browserSync.reload;
     
 
@@ -100,7 +101,6 @@ gulp.task('partials', function () {
         .pipe(gulp.dest(path.production.partials))
         .pipe(reload({stream: true}));
 });
-
 //gulp.task('image', function () {
 //    gulp.src(path.create.img) //Выберем наши картинки
 //        .pipe(imagemin({ progressive: true, svgoPlugins: [{removeViewBox: false}], interlaced: true }))
@@ -158,6 +158,12 @@ gulp.task('webserver', function () {
     browserSync(config);
 });
 
+gulp.task('start', ['webserver'], function () {
+    jsonServer.start({ data: './.create/data/db.json', port: 3000});
+    browserSync({host: 'localhost', port: 3000});
+});
+
+
 gulp.task('uploads', function () {
     gulp.src(path.create.uploads)
         .pipe(imagemin({ progressive: true, svgoPlugins: [{removeViewBox: false}],use: [pngquant()], interlaced: true}))
@@ -188,4 +194,4 @@ gulp.task('watch', function(){
 //    });    
 });
 
-gulp.task('default', ['build', 'webserver', 'watch', 'css', 'libs']);
+gulp.task('default', ['build', 'start', 'watch', 'css', 'libs']);

@@ -17,77 +17,12 @@
 //                      'photos',
 //                      'posts', 
 //                      'todos',
-                      'users']
+                      'users'],
+            user: null
         };
                 
         $scope.model = model;
-    }])
-    .controller('adminUserCtrl', [ '$scope', '$location', '$window', 'UserService', 'AuthenticationService',
-       function AdminUserCtrl($scope, $location, $window, UserService, AuthenticationService){        
-        var _this = this;
-        $scope.isAuthenticated = false;
-        
-	   if (AuthenticationService.isLogged) {
-			$scope.isAuthenticated = true;
-		}
-		   
-        //Admin User Controller (login, logout)
-        $scope.logIn = function logIn(username, email) {
-            if (username !== undefined && email !== undefined) {
- 
-                UserService.logIn(username, email).success(function(data) {
-					if (data.length!=0)
-						{
-							AuthenticationService.isLogged = true;
-							$window.sessionStorage.token = data.token;
-							$location.path("/");
-						}
-                }).error(function(status, data) {
-                    console.log(status);
-                    console.log(data);
-                });                
-            }
-        }
- 
-        $scope.logout = function logout() {
-            if (AuthenticationService.isLogged) {
-                AuthenticationService.isLogged = false;
-                delete $window.sessionStorage.token;
-                $location.path("/");
-            }
-        }
-        
-//        $scope.submit = function() {
-//            debugger;
-//          return $http
-//            .post('Page on localhost:3000', {
-//              username: _this.username,
-//              password: _this.password
-//            })
-//            .then(function(response) {
-//                _this.isAuthenticated = true;
-//                  localStorage['token'] = response.data.token;
-//                  alert('Login successful');
-//                }, function() {
-//                  _this.isAuthenticated = false	;
-//                  alert('Login fail');
-//                });
-//        }
-//        $scope.fetch = function() {
-//          return $http
-//            .post('Page on localhost:3000')
-//            .then(function() {
-//              alert('Fetch resource successful');
-//            }, function() {
-//              alert('Can not fetch resource');
-//            });
-        
-//        $scope.submit = function(){
-////          console.log("submit");            
-//            сredentialsService.verify($scope.username, $scope.password);
-//        };
-    
-    }])
+    }])    
     .directive("authorization", function(){
         return{
             templateUrl: 'partials/authorization.html'

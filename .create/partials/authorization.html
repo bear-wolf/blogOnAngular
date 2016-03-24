@@ -1,6 +1,6 @@
 
-<div class="authorization" data-ng-controller="adminUserCtrl">
-   <form ng-submit="logIn(username, email)" ng-show="isAuthenticated==false">
+<div class="authorization" data-ng-controller="authCtrl">
+   <form ng-submit="logIn(username, email)" ng-show="!isLogged">
         <ul>
             <li><input type="text" class="text-empty" ng-model="username" name="username" required placeholder="Введіть ім'я"></li>
             <li><input type="text" class="text-empty" ng-model="email" name="email" required placeholder="Введіть e-mail"></li>
@@ -8,8 +8,8 @@
         </ul>
     </form>        
     
-    <div class="successfully" ng-show="isAuthenticated==true">
-        <p>Добрий день {{user.name}}</p>    
+    <div class="successfully" ng-show="isLogged">
+        <p>Добрий день {{user.toDispay}}</p>    
         <a href="" class="btn btn-primaty" ng-click="logout(username)">Вийти</a>
     </div>
     

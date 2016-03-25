@@ -1,6 +1,7 @@
 (function(angular){
+    'use strict';
     
-    angular.module('globalModule',[])
+    angular.module('globalModules',[ 'authModules'])
     .config([function(){
         console.log("Global Module:: config");
     }])
@@ -16,10 +17,17 @@
 //                      'photos',
 //                      'posts', 
 //                      'todos',
-                      'users']
+                      'users'],
+            user: null,
+            isLogged:false
         };
                 
         $scope.model = model;
-    }]);
+    }])    
+    .directive("authorization", function(){
+        return{
+            templateUrl: 'partials/authorization.html'
+        }
+    });
     
 })(window.angular);

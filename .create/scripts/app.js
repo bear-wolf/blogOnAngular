@@ -1,23 +1,43 @@
 'use strict';
 
-
-//var resouce = require('./angular-resource');
-//'', 'ngResource', 'appControllers'
-
-angular.module('appSite',['ngRoute', 'ngResource', 'globalModule', 'adminModule'])
-    .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource', 'globalModules', 'adminModules', 'authModules', 'userModules'])
+    .config([ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $location, $httpProvider) {
         console.log("Configuration appSite");
         $routeProvider
           .when('/', { templateUrl: './partials/main.html',controller: 'AdminCtrl'})
-          .when('/albums', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
-          .when('/comments', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
-          .when('/photos', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
-          .when('/posts', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
-          .when('/todos', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
-          .when('/users', {templateUrl: './partials/entity.html', controller: 'entityCtrl'})
+          .when('/login', { templateUrl: './partials/login.html', controller: 'authCtrl'})
+          .when('/albums', { templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/comments', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/photos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/posts', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/todos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/users/', {   
+                    controller:'usersCtrl', 
+                    templateUrl: './partials/users/index.html',                
+                    entity: 'users',
+                    access: { requiredAuthentication: true }
+            })
+          .when('/users/:userId', {   
+                controller:'usersCtrl', 
+                templateUrl:'./partials/users/index.html',                
+                entity: 'usersEdit',
+                access: { requiredAuthentication: true }
+            })
           .otherwise({redirectTo: '/'});
-        $locationProvider.html5Mode(true);
+        
+        $location.html5Mode(true).hashPrefix('!');
+        $httpProvider.interceptors.push('AuthInterceptor');
     }])
-    .run([function(){
+    .run(['$rootScope', '$location', '$window', 'AuthenticationService', function($rootScope, $location,  $window, AuthenticationService){
         console.log("Run appSite");
+       
+        $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+            //redirect only if both isAuthenticated is false and no token is set
+            if (nextRoute != null && nextRoute.access != null && nextRoute.access.requiredAuthentication 
+                //&& !AuthenticationService.isAuthenticated
+                && !$window.sessionStorage.token) {
+
+                $location.path("/login");
+            }
+        });
     }])

@@ -13,6 +13,15 @@ header .title{
     font-size: 18px;
 }
 
+.title.small{
+    font-size: 17px;
+    border: none;
+    text-transform: none;
+    margin: 0;
+    display: block;
+    text-align: center;
+}
+
 div.tabs {
 
 }
@@ -73,3 +82,50 @@ margin-top: 0;
 .ui-tabs .ui-tabs-nav{
     height: 43px;
 }
+
+.text-empty {
+    border: 1px solid #ddd;
+    background: #fff;
+    line-height: 45px;
+    height: 45px;
+    padding-left: 16px;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    font-family: Tahoma;
+}
+
+.authorization{
+    float: right;
+    max-width: 220px;
+    width: 100%;
+	position: relative;
+	z-index: 50;
+}
+.authorization li{ padding-bottom: 10px;}
+
+.note,
+.error{
+    color: #f00;
+    text-align: center;
+    display: block;
+    margin: 5px 0;
+}
+
+.disable{ display: none;}
+
+
+.page-login .authorization{
+    float: none;
+    margin: 0 auto;
+}
+
+.inline{ display: inline-block; }
+
+.table a{
+    margin: 0 2px;
+    background: none;    
+}
+.navbar{ margin: 0; }
+
+.block-btn{ margin-top: 15px;}

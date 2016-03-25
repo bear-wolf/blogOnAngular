@@ -1,0 +1,32 @@
+
+<div class="authorization" data-ng-controller="authCtrl">
+   <form ng-submit="logIn(username, email)" name="login" ng-show="!model.isLogged">
+        <span class="note" ng-show="message!=null">{{message}}</span>
+        <ul>
+            <li><input type="text" class="text-empty" ng-model="username" required name="username" placeholder="Введіть ім'я"></li>
+            <li><input type="email" class="text-empty" ng-model="email" required name="email" placeholder="Введіть e-mail"></li>
+            <li><input type="submit" class="btn btn-primary" value="Вхід"></li>
+        </ul>
+        <div class="message" ng-messages="login.username.$error">
+            <div ng-message="number">Should be a number</div>
+            <div ng-message="max">The number is too large.</div>
+        </div>
+    </form>        
+    
+    <div class="successfully" ng-show="model.isLogged">
+        <p>Добрий день {{model.user.toDispay}}</p>    
+        <a href="" class="btn btn-primary" ng-click="logout(username)">Вийти</a>
+    </div>    
+</div>
+
+<!--
+<div class="form pull-right">
+    <form name="demoForm">
+      <input name="amount" type="number" ng-model="amount" max="100">
+      
+       <div ng-messages="demoForm.amount.$error">
+        <div ng-message="number">Should be a number</div>
+        <div ng-message="max">The number is too large.</div>
+      </div>
+    </form>
+</div>-->

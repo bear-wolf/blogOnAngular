@@ -1,5 +1,5 @@
 (function(angular){    
-    angular.module('constModule', [])    
+    angular.module('constModules', [])    
     .config([function(){
     }])
     .run([function(){

@@ -288,6 +288,9 @@ header .title{
     font-size: 17px;
     border: none;
     text-transform: none;
+    margin: 0;
+    display: block;
+    text-align: center;
 }
 
 div.tabs {
@@ -372,11 +375,28 @@ margin-top: 0;
 }
 .authorization li{ padding-bottom: 10px;}
 
+.note,
+.error{
+    color: #f00;
+    text-align: center;
+    display: block;
+    margin: 5px 0;
+}
+
 .disable{ display: none;}
 
-.authorization .active{ display: block;}
 
 .page-login .authorization{
     float: none;
     margin: 0 auto;
 }
+
+.inline{ display: inline-block; }
+
+.table a{
+    margin: 0 2px;
+    background: none;    
+}
+.navbar{ margin: 0; }
+
+.block-btn{ margin-top: 15px;}

@@ -1,39 +1,67 @@
 (function(angular){
-    angular.module('authModule', [
+    angular.module('authModules', [
         'authControllers',
         'authInterceptors',
         'authServices',
-        'constModule'
+        'constModules'
     ])
     .config([function(){
-        //console.log("authModule is cofiguration")
+        console.log("authModules is cofiguration")
     }])
     .run([function(){
     }]);
     
     angular.module('authControllers',[])
     .controller('authCtrl', [ '$scope', '$location', '$window', 'AuthenticationService', function($scope, $location, $window, AuthenticationService){                
-                        
+        
+        $scope.message = null;
+        
         if (AuthenticationService.isLogged)
             {
-                $scope.user.toDispay = $scope.user.usename;
-            } else AuthenticationService.isLogged = false;                        
+                $scope.model.user = angular.fromJson(AuthenticationService.getStorage("user"));
+                if ($scope.model.user == null)
+                    {
+                        AuthenticationService.isLogged = false;
+                        $scope.model.isLogged = false;
+                    }
+                else {
+                    $scope.model.user.toDispay = $scope.model.user.username;                
+                    $scope.model.isLogged = true;                    
+                }
+            } else 
+            {
+                $scope.model.isLogged = false;
+                AuthenticationService.isLogged = false;
+                AuthenticationService.removeSorage("user");
+            }
                 
         $scope.logIn = function(username, email){
             AuthenticationService.login($scope.username, $scope.email).then(function(data){
-                $scope.model.user = data[0];
-                $location.path("/");
-            }, function(data){
-                debugger;
+            $scope.message = null;
+            $scope.isLogged = false;
+            if (data.length == 1)
+                  {
+                    AuthenticationService.setToken(data[0].username); 
+                    AuthenticationService.isLogged = true;                                
+                    $scope.user = data[0];
+                    $scope.isLogged = true;
+                    AuthenticationService.setSorage("user", data[0])                                                             
+                    $location.path("/");
+                    $window.location.reload();  
+                  }                  
+                else {
+                    $scope.message = "User is not exist";
+                }
+            },function(data){
+                throw "This is an exception";
             }); 
         }
                     
-        $scope.logout = function logout() {
-            if (AuthenticationService.isLogged) {
+        $scope.logout = function logout() {            
                 AuthenticationService.isLogged = false;
-                delete $window.sessionStorage.token;
-                $location.path("/");
-            }
+                AuthenticationService.removeSorage("user");
+                $location.path("/");  
+                $window.location.reload();  
         }    
         
 //	   if (AuthenticationService.isLogged) {
@@ -87,25 +115,17 @@
     .service('AuthenticationService', ['$http', '$location', '$q', '$window', 'PATH', function ($http, $location, $q, $window, PATH) {
         var Auth = {
           getToken: function () {
-            return $window.localStorage.getItem('token');
-          },
-          isLogged: false,            
+            return $window.sessionStorage.getItem('token');
+          },          
           login: function (username, email) {
               var deferred = $q.defer();
 
               $http.get(PATH.users+"?username="+username+"&email="+email)              
-              .success( function (response, status, headers, config) {
-                  if (response.length!=0)
-                      {
-                            if (response.token == undefined) { 
-                                Auth.setToken(response[0].username); 
-                                Auth.isLogged = true;                                
-                            }                  
-                            deferred.resolve(response, status, headers, config);   
-                      }                
+              .success( function (response, status, headers, config) {                  
+                    deferred.resolve(response, status, headers, config);              
               })
               .error(function (response, status, headers, config) {
-                deferred.reject(response, status, headers, config);
+                    deferred.reject(response, status, headers, config);
               });
 
               return deferred.promise;
@@ -116,13 +136,24 @@
           },
             
           setToken: function (token) {
-            $window.localStorage.setItem('token', token);
+                return $window.sessionStorage.setItem('token', token);
+          },
+          getStorage:function(key)
+          {
+                return $window.sessionStorage[key];
+          },
+          setSorage: function (key, data) {           
+              $window.sessionStorage[key] = angular.toJson(data);
+          },
+          removeSorage: function (key) {
+            $window.sessionStorage.removeItem(key);
           },
 
           deleteToken: function () {
-            $window.localStorage.removeItem('token');
+            $window.sessionStorage.removeItem('token');
           }
         };
+        Auth.isLogged = Auth.getToken() == null ? false : true;           
 
         return Auth;
     }]);

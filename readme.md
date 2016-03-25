@@ -3,7 +3,7 @@
    npm install
  
  2) *Потрібно інсталювати файли через bower
-    $ bower install jquery angular angular-resource angular-route bootstrap jquery-ui growl
+    $ bower install jquery angular angular-resource angular-route angular-messages bootstrap jquery-ui growl 
 
 
 <!--

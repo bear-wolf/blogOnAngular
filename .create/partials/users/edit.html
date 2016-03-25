@@ -1,0 +1,41 @@
+<section class="row">
+    <div class="container form-edit">
+        
+        <form class="" name="user">
+            <div class="clearfix"> 
+                <span class="title small">Edit user</span>
+
+                <div class="row">
+                    <div class="col-sm-3">Ім'я</div>
+                    <div class="col-sm-9"><input type="text" class="text-empty" id="firstName" placeholder="Введіть ім'я"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Нік</div>
+                    <div class="col-sm-9"><input type="text" class="text-empty" id="username" placeholder="Введіть нік"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Електронна пошта</div>
+                    <div class="col-sm-9"><input type="text" class="text-empty" id="email" placeholder="Введіть email"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Адрес:</div>
+                    <div class="col-sm-9">
+                        <p><input type="text" id="street" class="text-empty" placeholder="Введіть вулицю"></p>
+                        <p><input type="text" id="suite" class="text-empty" placeholder="Введіть suite"></p>
+                        <p><input type="text" id="city" class="text-empty" placeholder="Введіть місто"></p>
+                        <p><input type="text" id="zipcode" class="text-empty" placeholder="Введіть поштовий код"></p>                    
+                        <fieldset>
+                            <p><input type="text" id="geo_lat" class="text-empty" placeholder="Введіть geo_lat"></p>
+                            <p><input type="text" id="geo_lng" class="text-empty" placeholder="Введіть geo_lng"></p>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 block-btn"><input type="submit" class="btn btn-primary" value="Зберегти"></div>
+                </div>
+            </div>
+        </form>
+        
+        <div class="block-btn"><a href="{{linkToBack}}" class="btn btn-default">Back</a></div>        
+    </div>
+</section>

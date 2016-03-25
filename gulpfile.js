@@ -33,7 +33,8 @@ var file ={
         './bower_components/jquery-ui/jquery-ui.min.js',
         './bower_components/growl/javascripts/jquery.growl.js',
         './bower_components/angular-resource/angular-resource.min.js',
-        './bower_components/angular-route/angular-route.min.js'
+        './bower_components/angular-route/angular-route.min.js',
+        './bower_components/angular-messages/angular-messages.min.js'
     ],
     css: [
             './.create/css/normalize.css',
@@ -147,7 +148,7 @@ gulp.task('libs', function () {
 //            if (i+1< fileToSite.js.length) str += ","
 //        }    
     //str = "["+str+"]";
-    gulp.src([ file.js[0], file.js[1], file.js[2], file.js[3], file.js[4], file.js[5], file.js[6] ])    
+    gulp.src([ file.js[0], file.js[1], file.js[2], file.js[3], file.js[4], file.js[5], file.js[6], file.js[7] ])    
         .pipe(gulp.dest(path.create.outLib))
         .pipe(gulp.dest(path.production.libs)) 
         .pipe(reload({stream: true})); //И перезагрузим наш сервер для обновлений

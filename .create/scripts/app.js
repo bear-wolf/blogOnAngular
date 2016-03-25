@@ -1,10 +1,6 @@
 'use strict';
 
-
-//var resouce = require('./angular-resource');
-//'', 'ngResource', 'appControllers'
-
-angular.module('appSite',['ngRoute', 'ngResource','globalModule', 'adminModule', 'authModule'])
+angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource', 'globalModules', 'adminModules', 'authModules', 'userModules'])
     .config([ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $location, $httpProvider) {
         console.log("Configuration appSite");
         $routeProvider
@@ -15,7 +11,18 @@ angular.module('appSite',['ngRoute', 'ngResource','globalModule', 'adminModule',
           .when('/photos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
           .when('/posts', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
           .when('/todos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
-          .when('/users', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/users/', {   
+                    controller:'usersCtrl', 
+                    templateUrl: './partials/users/index.html',                
+                    entity: 'users',
+                    access: { requiredAuthentication: true }
+            })
+          .when('/users/:userId', {   
+                controller:'usersCtrl', 
+                templateUrl:'./partials/users/index.html',                
+                entity: 'usersEdit',
+                access: { requiredAuthentication: true }
+            })
           .otherwise({redirectTo: '/'});
         
         $location.html5Mode(true).hashPrefix('!');

@@ -1,7 +1,7 @@
 (function(angular){
     'use strict';
     
-    angular.module('globalModule',[])
+    angular.module('globalModules',[ 'authModules'])
     .config([function(){
         console.log("Global Module:: config");
     }])
@@ -18,7 +18,8 @@
 //                      'posts', 
 //                      'todos',
                       'users'],
-            user: null
+            user: null,
+            isLogged:false
         };
                 
         $scope.model = model;

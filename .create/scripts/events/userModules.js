@@ -10,18 +10,56 @@
     }])
     
     angular.module('userControllers',[])
-    .controller('usersCtrl',['$scope','userService', '$route', '$routeParams', function($scope, userService, $route, $routeParams){
+    .controller('usersCtrl',['$scope','userService', '$routeParams', '$location', function($scope, userService, $routeParams, $location){
         console.log("usersCtrl from usersModule:: running");             
         //var entity = $route.current.$$route.entity;
         $scope.userId = $routeParams.userId;
-        new userService.getByUserEmail($scope.model.user).then(function(data){                         
-            $scope.users = data;
-            $scope.link = "users/";
+        $scope.link = "users/";
+        
+        this.message = null;
+        this.users = {
+            id : null,
+            name : null,
+            username: null,
+            email: null,
+            address: {
+                street: null,
+                suite: null,
+                city: null,
+                zipcode: null,
+                geo: {
+                  lat: null,
+                  lng: null
+                }
+              },
+          phone: null,
+          website: null,
+          company: {
+            name: null,
+            catchPhrase: null,
+            bs: null
+          }
+        };        
+        
+        $scope.users = this.users;
+        
+        new userService.getByUserEmail($scope.model.user).then(function(data){                                     
+            $scope.users = ($scope.userId==undefined) ? data : data[0];            
         });  
+        $scope.save = function(form){            
+             if(form.$valid) { 
+                new userService.save(this.users).then(function(data){                    
+                    $scope.message = "Your saving was successfuly";
+                    //$location.path("/users");
+                }, function(){ 
+                    $scope.message = "This is error during save of user";                    
+                });
+           }
+        };
     }])    
     .directive("edittmpl", function(){
        return {
-           controller:"entityCtrl",
+           //controller:"usersCtrl",
            templateUrl: "partials/users/edit.html",
            link : function($scope, element, attributes) {
                
@@ -45,7 +83,19 @@
                         });
 
                     return deferred.promise;
-                },            
+                },  
+                save: function(data){
+                     var deferred = $q.defer();
+                     $http.post(PATH.users, data)              
+                         .success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                         })
+                         .error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+
+                    return deferred.promise;
+                },  
             }
             
         return Users; 

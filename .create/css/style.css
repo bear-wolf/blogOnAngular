@@ -129,3 +129,20 @@ margin-top: 0;
 .navbar{ margin: 0; }
 
 .block-btn{ margin-top: 15px;}
+
+
+.message{
+    background-color: aquamarine;
+    text-align: center;
+    display: block;
+    line-height: 40px;
+    font-size: 20px;
+    transition: 1s ease;
+}
+
+.entity{ max-width: 600px;}
+.entity .text-empty{ margin-bottom: 5px;}
+.entity .item-col{ line-height: 45px;}
+.entity .item-col:first-child{
+    font-weight: bold;
+}

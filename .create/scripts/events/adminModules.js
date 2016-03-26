@@ -4,10 +4,10 @@
         'adminService'        
     ])
     .config([function(){
-        console.log("Admin Modules:: config");
+        //console.log("Admin Modules:: config");
     }])
     .run([function(){
-        console.log("Admin Modules:: running");
+        //console.log("Admin Modules:: running");
     }])
     .controller('AdminCtrl',['$scope',function($scope){                        
         $scope.setItem = function(item){
@@ -15,8 +15,7 @@
             location.reload;                      
         };
     }])
-    .controller('entityCtrl',['$scope','entityService', '$route', '$routeParams', function($scope, entityService, $route, $routeParams){
-        console.log("entityCtrl -1- from adminModule:: running");             
+    .controller('entityCtrl',['$scope','entityService', '$route', '$routeParams', function($scope, entityService, $route, $routeParams){        
         var entity = $route.current.$$route.entity;
         $scope.userId = $routeParams.userId;
         switch (entity)
@@ -44,16 +43,6 @@
             }
         }
     })
-//    .directive("edittmpl", function(){
-//       return {
-//           controller:"entityCtrl",
-//           templateUrl: "partials/users/edit.html",
-//           link : function($scope, element, attributes) {
-//               
-//               $scope.linkToBack = "users/"
-//           }
-//       } 
-//    });
     
     angular.module('adminService',['constModules'])
     .service('entityService',['$http', '$q','PATH', 'AuthenticationService', function($http, $q, PATH, AuthenticationService){       

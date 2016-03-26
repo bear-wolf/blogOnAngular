@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
-                          'globalModules', 'adminModules', 'authModules', 'userModules', 'albumModules'])
+                          'globalModules', 'adminModules', 'authModules', 'userModules', 'albumModules', 'photoModules', 'postModules'])
     .config([ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $location, $httpProvider) {
-        console.log("Configuration appSite");
+        //console.log("Configuration appSite");
         $routeProvider
           .when('/', { templateUrl: './partials/main.html',controller: 'AdminCtrl'})
           .when('/login', { templateUrl: './partials/login.html', controller: 'authCtrl'})
@@ -13,11 +13,25 @@ angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
                     access: { requiredAuthentication: true }})    
           .when('/albums/:albumId', { 
                     templateUrl: './partials/albums/index.html', 
-                    controller: 'albumCtrl',
-                    access: { requiredAuthentication: true }})  
+                    controller: 'albumEditCtrl',
+                    access: { requiredAuthentication: true }})          
           .when('/comments', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
-          .when('/photos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
-          .when('/posts', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/photos', {
+            templateUrl: './partials/photos/index.html', 
+            controller: 'photoCtrl', 
+            access: { requiredAuthentication: true }})
+          .when('/photos/:id', { 
+                templateUrl: './partials/photos/index.html', 
+                controller: 'photoEditCtrl',
+                access: { requiredAuthentication: true }})  
+          .when('/posts', {
+                templateUrl: './partials/posts/index.html',
+                controller: 'postCtrl',
+                access: { requiredAuthentication: true }})
+        .when('/posts/:id', {
+                templateUrl: './partials/posts/index.html',
+                controller: 'postCtrl',
+                access: { requiredAuthentication: true }})
           .when('/todos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
           .when('/users/', {   
                     controller:'usersCtrl', 
@@ -37,7 +51,7 @@ angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
         $httpProvider.interceptors.push('AuthInterceptor');
     }])
     .run(['$rootScope', '$location', '$window', 'AuthenticationService', function($rootScope, $location,  $window, AuthenticationService){
-        console.log("Run appSite");
+        //console.log("Run appSite");
        
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
             //redirect only if both isAuthenticated is false and no token is set

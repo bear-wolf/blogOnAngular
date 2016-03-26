@@ -3,18 +3,15 @@
     
     angular.module('globalModules',[ 'authModules'])
     .config([function(){
-        console.log("Global Module:: config");
+        //console.log("Global Module:: config");
     }])
     .run([function(){
-        console.log("Global Module:: running");
+        //console.log("Global Module:: running");
     }])
-    .controller('MainCtrl',['$scope',function($scope){
-        console.log("MainCtrl from globalModule:: running");
+    .controller('MainCtrl',['$scope',function($scope){        
         var model = {
             title : "Admin panel",       
             tables : ['albums',
-                      'comments',
-//                      'photos',
 //                      'posts', 
 //                      'todos',
                       'users'],

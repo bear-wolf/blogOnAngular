@@ -4,7 +4,9 @@
     text-transform: uppercase;
     line-height: 50px;
 }
-
+.title b{
+    display: block;
+}
 header .title{
     font-size: 20px;
 }
@@ -145,4 +147,55 @@ margin-top: 0;
 .entity .item-col{ line-height: 45px;}
 .entity .item-col:first-child{
     font-weight: bold;
+}
+
+.table th{ width: 50px;}
+.table .width200 { width: 200px;}
+.table .width100 { width: 100px;}
+
+.table td:last-child{ width: 100px;}
+
+.sortorder.reverse span:after {
+    content: '\25bc';
+}
+.sortorder{ cursor: pointer;}
+.sortorder span:after {
+    content: '\25b2';
+}
+
+.block-title{
+    line-height: 30px;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 15px;
+}
+.block-title{
+    padding-bottom: 5px;
+}
+.block-title .item-col button{
+    float: right;
+    margin-top: 5px;
+    display: block;
+}
+.block-title .item-col:last-child{ float: right;}
+.block-title .title.small{ line-height: 39px;}
+.filter{ 
+    width: auto;
+}
+.table td,
+.table th{
+    vertical-align: middle!important;
+}
+
+.table td:last-child,
+.table th{
+    text-align: center;
+}
+
+.table .text-empty{
+    height: 35px;
+    line-height: 35px;
+}
+
+.btn-add{
+    display: none!important;
 }

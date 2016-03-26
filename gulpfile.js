@@ -134,7 +134,7 @@ gulp.task('css',function(callback){
     gulpSequence('css-concat','css-build', callback);
 })
 
-gulp.task('fonts:build', function () {
+gulp.task('fonts', function () {
     gulp.src(path.create.fonts) 
         .pipe(gulp.dest(path.production.fonts)) 
 });
@@ -174,7 +174,7 @@ gulp.task('uploads', function () {
 gulp.task('build', [
     'html:build',         
     'uploads',
-    'fonts:build',
+    'fonts',
 	'scripts',
 	'partials'
 ]);
@@ -190,9 +190,9 @@ gulp.task('watch', function(){
     watch([path.watch.partials], function(event, cb) {
         gulp.start('partials');
     });
-//    watch([path.watch.fonts], function(event, cb) {
-//        gulp.start('fonts:build');
-//    });    
+    watch([path.watch.fonts], function(event, cb) {
+        gulp.start('fonts');
+    });   
 });
 
 gulp.task('default', ['build', 'start', 'watch', 'css', 'libs']);

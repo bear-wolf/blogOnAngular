@@ -3,16 +3,14 @@
     
     angular.module('userModules',[ 'authModules', 'userControllers', 'userServices'])
     .config([function(){
-        console.log("userModules :: config");
+        //console.log("userModules :: config");
     }])
     .run([function(){
-        console.log("userModules :: running");
+        //console.log("userModules :: running");
     }])
     
     angular.module('userControllers',[])
     .controller('usersCtrl',['$scope','userService', '$routeParams', '$location', function($scope, userService, $routeParams, $location){
-        console.log("usersCtrl from usersModule:: running");             
-        //var entity = $route.current.$$route.entity;
         $scope.userId = $routeParams.userId;
         $scope.link = "users/";
         
@@ -59,7 +57,7 @@
     }])    
     .directive("edittmpl", function(){
        return {
-           //controller:"usersCtrl",
+           controller:"usersCtrl",
            templateUrl: "partials/users/edit.html",
            link : function($scope, element, attributes) {
                
@@ -84,6 +82,18 @@
 
                     return deferred.promise;
                 },  
+                get : function(){
+                     var deferred = $q.defer();
+                     $http.get(PATH.users)              
+                         .success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                         })
+                         .error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+
+                    return deferred.promise;
+                },  
                 save: function(data){
                      var deferred = $q.defer();
                      $http.post(PATH.users, data)              
@@ -99,6 +109,6 @@
             }
             
         return Users; 
-    }])
+    }]);
         
 })(window.angular);

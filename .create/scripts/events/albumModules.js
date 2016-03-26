@@ -3,29 +3,74 @@
     
     angular.module('albumModules',[ 'authModules', 'albumControllers', 'albumServices'])
     .config([function(){
-        console.log("albumModules :: config");
+        //console.log("albumModules :: config");
     }])
     .run([function(){
-        console.log("albumModules :: running");
+        //console.log("albumModules :: running");
     }])
     
     angular.module('albumControllers',[])
-    .controller('albumCtrl',['$scope','albumService', '$routeParams', '$location', function($scope, albumService, $routeParams, $location){                
+    .controller('albumCtrl',['$scope','albumService', '$routeParams', '$location', '$q', 'userService', function($scope, albumService, $routeParams, $location, $q, userService){                
         $scope.albumId = $routeParams.albumId;
         $scope.link = "albums/";
         
-        this.message = null;
+        this.message = null;          
+        $scope.album = this.album;        
+        $scope.sort = 'title';
+        $scope.reverse = true;
+        
+        var promises = [];
+        promises.push(albumGet());
+        promises.push(userService.get());
+        
+        $q.all(promises).then(function (results) {
+            var albums = results[0];
+            var user = results[1];
+            for(var i=0; i<albums.length; i++)
+                {
+                    for(var j = 0; j< user.length; j++)
+                    {
+                        if (albums[i].userId == user[j].id) 
+                        {
+                            albums[i].userName = user[j].name;
+                            break;
+                        }
+                    }
+                }
+            $scope.albums = albums;
+        });        
+        
+        function albumGet()
+        {
+            return new albumService.getByUserId($scope.model.user.id).then(function(data){                                     
+                return ($scope.albumId == undefined) ? data : data[0];            
+            });  
+        }        
+       
+        $scope.remove = function(id)
+        {
+            if (confirm("You confirm removal?"))
+                {
+                    alert("ok");
+                }
+        }         
+        $scope.sorting = function(current) {
+            $scope.reverse = ($scope.sort === current) ? !$scope.reverse : false;
+            $scope.sort = current;
+          };
+    }])    
+    .controller('albumEditCtrl',['$scope','albumService','$routeParams', function($scope, albumService, $routeParams){
+        $scope.albumId = $routeParams.albumId;
         this.albums = {
             id : null,
             userId : null,
             title: null          
-        };        
+        };  
         
-        $scope.album = this.album;
-        
-        new albumService.getByUserId($scope.model.user.id).then(function(data){                                     
-            $scope.albums = ($scope.albumId == undefined) ? data : data[0];            
-        });  
+        new albumService.getById($routeParams.albumId).then(function(data){                                     
+            $scope.albums = data[0];            
+            return $scope.albums;
+            });  
         $scope.save = function(form){            
              if(form.$valid) { 
                 new albumService.save(this.albums).then(function(data){                    
@@ -36,23 +81,24 @@
                 });
            }
         };
-        $scope.remove = function(id)
-        {
-            if (confirm("You confirm removal?"))
-                {
-                    alert("ok");
-                }
-        }
-    }])    
-    .directive("editalmubtmpl", function(){
+    }])
+    .directive("editalbumtmpl", function(){
        return {
            templateUrl: "partials/albums/edit.html",
            link : function($scope, element, attributes) {               
                $scope.linkToBack = "albums/"
            }
        } 
+    })
+    .directive("selectalbumtmpl", function(){
+       return {
+           templateUrl: "partials/albums/select.html",
+           link : function($scope, element, attributes) {               
+               $scope.linkToBack = "albums/"
+           }
+       } 
     });
-        
+            
     angular.module('albumServices',['constModules'])
     .service('albumService',['$http', '$q','PATH', function($http, $q, PATH){       
                         
@@ -60,6 +106,18 @@
                 getByUserId : function(id){
                      var deferred = $q.defer();
                      $http.get(PATH.albums+"?userId="+id)              
+                         .success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                         })
+                         .error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+
+                    return deferred.promise;
+                },  
+                getById : function(id){
+                     var deferred = $q.defer();
+                     $http.get(PATH.albums+"?id="+id)              
                          .success(function(data, status, headers, config) {
                             deferred.resolve(data);
                          })

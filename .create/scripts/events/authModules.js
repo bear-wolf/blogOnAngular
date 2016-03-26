@@ -6,7 +6,7 @@
         'constModules'
     ])
     .config([function(){
-        console.log("authModules is cofiguration")
+        //console.log("authModules is cofiguration")
     }])
     .run([function(){
     }]);

@@ -1,0 +1,30 @@
+<navtmpl></navtmpl>
+
+<editalmubtmpl data-ng-show="albumId != undefined"></editalmubtmpl>
+
+<section class="row section" data-ng-show="albumId == undefined">            
+       <h2 class="title small">Albums</h2>
+        <div class="container">                   
+             <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <td>userId</td>
+                        <td>title</td>
+                        <td>operations</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in albums">
+                        <th>{{$index+1}}</th>
+                        <td>{{item.id}}</td>
+                        <td>{{item.title}}</td>
+                        <td>
+                            <a href="{{link+item.id}}" class="btn-default inline underline">edit</a>
+                            <a href="javascript:void(0)" class="btn-default inline underline" ng-click="remove(item.id)">remove</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>            
+</section> 

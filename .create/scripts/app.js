@@ -1,12 +1,20 @@
 'use strict';
 
-angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource', 'globalModules', 'adminModules', 'authModules', 'userModules'])
+angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
+                          'globalModules', 'adminModules', 'authModules', 'userModules', 'albumModules'])
     .config([ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $location, $httpProvider) {
         console.log("Configuration appSite");
         $routeProvider
           .when('/', { templateUrl: './partials/main.html',controller: 'AdminCtrl'})
           .when('/login', { templateUrl: './partials/login.html', controller: 'authCtrl'})
-          .when('/albums', { templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/albums', { 
+                    templateUrl: './partials/albums/index.html', 
+                    controller: 'albumCtrl',
+                    access: { requiredAuthentication: true }})    
+          .when('/albums/:albumId', { 
+                    templateUrl: './partials/albums/index.html', 
+                    controller: 'albumCtrl',
+                    access: { requiredAuthentication: true }})  
           .when('/comments', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
           .when('/photos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
           .when('/posts', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})

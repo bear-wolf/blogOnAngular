@@ -1,0 +1,63 @@
+<section class="row">
+    <div class="container">
+        
+       <div class="message successful" ng-show="message==null ? false : true">{{message}}</div>
+                        
+        <div class="entity">                                                        
+            <form class="" name="user" ng-submit="save(user)">
+                <input type="hidden" ng-model="users.id" name="users.id">               
+                <div class="clearfix"> 
+                    <span class="title small">Edit user</span>
+
+                    <div class="row">
+                        <div class="col-sm-3 item-col">Name</div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="users.name" ng-model="users.name" placeholder="Введіть ім'я"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 item-col">Username</div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="users.username" ng-model="users.username" placeholder="Введіть нік"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 item-col">Email</div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="users.email"  ng-model="users.email" placeholder="Введіть email"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 item-col">Address:</div>
+                        <div class="col-sm-9 item-col">
+                            <p><input type="text" class="text-empty" name="users.address.street" ng-model="users.address.street" placeholder="Введіть вулицю"></p>
+                            <p><input type="text" class="text-empty" name="users.address.suite"  ng-model="users.address.suite" placeholder="Введіть suite"></p>
+                            <p><input type="text" class="text-empty" name="users.address.city" ng-model="users.address.city" placeholder="Введіть місто"></p>
+                            <p><input type="text" class="text-empty" name="users.address.zipcode" ng-model="users.address.zipcode" placeholder="Введіть поштовий код"></p>                    
+                            <fieldset>
+                                <p><input type="text" class="text-empty" name="users.address.geo.geoLat" ng-model="users.address.geo.lat" placeholder="Введіть geo_lat"></p>
+                                <p><input type="text" class="text-empty" name="users.address.geo.geoLng" ng-model="users.address.geo.lng" placeholder="Введіть geo_lng"></p>
+                            </fieldset>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-3 item-col">Phone</div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="users.phone"  ng-model="users.phone" placeholder="Input the phone"></div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-3 item-col">website</div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="users.website"  ng-model="users.website" placeholder="Input the website"></div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-3 item-col">Company:</div>
+                        <div class="col-sm-9 item-col">
+                            <p><input type="text" class="text-empty" name="users.company.name" ng-model="users.company.name" placeholder="Input company name"></p>
+                            <p><input type="text" class="text-empty" name="users.company.catchPhrase"  ng-model="users.company.catchPhrase" placeholder="catchPhrase"></p>
+                            <p><input type="text" class="text-empty" name="users.company.bs" ng-model="users.company.bs" placeholder="bs"></p>
+                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 item-col"></div>
+                        <div class="col-sm-9 block-btn"><input type="submit" class="btn btn-primary" value="Зберегти"></div>
+                    </div>
+                </div>
+            </form>
+        
+            <div class="block-btn"><a href="{{linkToBack}}" class="btn btn-default">Back</a></div>        
+        </div>
+    </div>
+</section>

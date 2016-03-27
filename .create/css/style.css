@@ -1,9 +1,31 @@
-header .title{
+.title{
     text-align: center;
     border: 1px solid #ccc;
-    font-size: 20px;
     text-transform: uppercase;
     line-height: 50px;
+}
+.title b{
+    display: block;
+}
+header .title{
+    font-size: 20px;
+}
+
+.section .title{
+    font-size: 18px;
+}
+
+.title.small{
+    font-size: 17px;
+    border: none;
+    text-transform: none;
+    margin: 0;
+    display: block;
+    text-align: center;
+}
+
+body{
+    font-family: MuseoSansRegular;
 }
 
 div.tabs {
@@ -65,4 +87,140 @@ margin-top: 0;
 
 .ui-tabs .ui-tabs-nav{
     height: 43px;
+}
+
+.text-empty {
+    border: 1px solid #ddd;
+    background: #fff;
+    line-height: 45px;
+    height: 45px;
+    padding-left: 16px;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    font-family: Tahoma;
+}
+
+.authorization{
+    float: right;
+    max-width: 220px;
+    width: 100%;
+	position: relative;
+	z-index: 50;
+}
+.authorization li{ padding-bottom: 10px;}
+
+.note,
+.error{
+    color: #f00;
+    text-align: center;
+    display: block;
+    margin: 5px 0;
+    font-family: MuseoSansMedium;
+}
+
+.disable{ display: none;}
+
+
+.page-login .authorization{
+    float: none;
+    margin: 0 auto;
+}
+
+.inline{ display: inline-block; }
+
+.table a{
+    margin: 0 2px;
+    background: none;    
+}
+.navbar{ margin: 0; }
+
+.block-btn{ margin-top: 15px;}
+
+
+.message{
+    background-color: aquamarine;
+    text-align: center;
+    display: block;
+    line-height: 40px;
+    font-size: 20px;
+    transition: 1s ease;
+}
+
+.entity{ max-width: 600px;}
+.entity .text-empty{ margin-bottom: 5px;}
+.entity .item-col{ line-height: 45px;}
+.entity .item-col:first-child{
+    font-weight: bold;
+}
+
+.table th{ width: 50px;}
+.table .width230 { width: 230px;}
+.table .width200 { width: 200px;}
+.table .width150 { width: 150px;}
+.table .width100 { width: 100px;}
+.table td:last-child{ width: 110px;}
+
+.table td:last-child a:hover{
+    background-color: transparent;
+}
+.table td:last-child a:last-child{ display: none;}
+
+.sortorder.reverse span:after {
+    content: '\25bc';
+}
+.sortorder{ cursor: pointer;}
+.sortorder span:after {
+    content: '\25b2';
+}
+
+.block-title{
+    line-height: 30px;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 15px;
+}
+.block-title{
+    padding-bottom: 5px;
+}
+.block-title .item-col button{
+    float: right;
+    margin-top: 5px;
+    display: block;
+}
+.block-title .item-col:last-child,
+.block-title .item-col:last-child .btn{ float: right;}
+.block-title .title.small{ line-height: 39px;}
+.filter{ 
+    width: auto;
+}
+.table td,
+.table th{
+    font-family: Tahoma;
+    vertical-align: middle!important;
+}
+
+.table td:last-child,
+.table th{
+    text-align: center;
+}
+
+.table .text-empty{
+    height: 35px;
+    line-height: 35px;
+}
+
+.btn-add{
+    display: none!important;
+}
+
+.authorization .btn{
+    width: 70px;
+    margin: 0 auto;
+    display: block;
+    padding: 0;
+    line-height: 35px;
+    height: 35px;
+}
+.navbar-nav>li>a{
+    font-family: MuseoSansBold;
 }

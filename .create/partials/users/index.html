@@ -1,0 +1,36 @@
+<navtmpl></navtmpl>
+
+<edittmpl data-ng-show="userId != undefined"></edittmpl>
+
+<section class="row section" data-ng-show="userId == undefined && users != undefined">            
+       <h2 class="title small">Users</h2>
+        <div class="container">                   
+             <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <td>firstName</td>
+                        <td>username</td>
+                        <td>website</td>
+                        <td>email</td>
+                        <td>phone</td>
+                        <td>oparations</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in users">
+                        <th>{{$index+1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.username}}</td>
+                        <td>{{item.website}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>
+                            <a href="{{link+item.id}}" class="btn-default inline underline">edit</a>
+                            <a href="{{link+item.id}}" class="btn-default inline underline">remove</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>            
+</section> 

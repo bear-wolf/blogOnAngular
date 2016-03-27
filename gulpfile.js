@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     gulpSequence = require('gulp-sequence'),
     browserSync = require("browser-sync"),
+    jsonServer = require("gulp-json-srv"),
     reload = browserSync.reload;
     
 
@@ -32,7 +33,8 @@ var file ={
         './bower_components/jquery-ui/jquery-ui.min.js',
         './bower_components/growl/javascripts/jquery.growl.js',
         './bower_components/angular-resource/angular-resource.min.js',
-        './bower_components/angular-route/angular-route.min.js'
+        './bower_components/angular-route/angular-route.min.js',
+        './bower_components/angular-messages/angular-messages.min.js'
     ],
     css: [
             './.create/css/normalize.css',
@@ -100,7 +102,6 @@ gulp.task('partials', function () {
         .pipe(gulp.dest(path.production.partials))
         .pipe(reload({stream: true}));
 });
-
 //gulp.task('image', function () {
 //    gulp.src(path.create.img) //Выберем наши картинки
 //        .pipe(imagemin({ progressive: true, svgoPlugins: [{removeViewBox: false}], interlaced: true }))
@@ -133,7 +134,7 @@ gulp.task('css',function(callback){
     gulpSequence('css-concat','css-build', callback);
 })
 
-gulp.task('fonts:build', function () {
+gulp.task('fonts', function () {
     gulp.src(path.create.fonts) 
         .pipe(gulp.dest(path.production.fonts)) 
 });
@@ -147,7 +148,7 @@ gulp.task('libs', function () {
 //            if (i+1< fileToSite.js.length) str += ","
 //        }    
     //str = "["+str+"]";
-    gulp.src([ file.js[0], file.js[1], file.js[2], file.js[3], file.js[4], file.js[5], file.js[6] ])    
+    gulp.src([ file.js[0], file.js[1], file.js[2], file.js[3], file.js[4], file.js[5], file.js[6], file.js[7] ])    
         .pipe(gulp.dest(path.create.outLib))
         .pipe(gulp.dest(path.production.libs)) 
         .pipe(reload({stream: true})); //И перезагрузим наш сервер для обновлений
@@ -158,6 +159,12 @@ gulp.task('webserver', function () {
     browserSync(config);
 });
 
+gulp.task('start', ['webserver'], function () {
+    jsonServer.start({ data: './.create/data/db.json', port: 3000});
+    browserSync({host: 'localhost', port: 3000});
+});
+
+
 gulp.task('uploads', function () {
     gulp.src(path.create.uploads)
         .pipe(imagemin({ progressive: true, svgoPlugins: [{removeViewBox: false}],use: [pngquant()], interlaced: true}))
@@ -167,7 +174,7 @@ gulp.task('uploads', function () {
 gulp.task('build', [
     'html:build',         
     'uploads',
-    'fonts:build',
+    'fonts',
 	'scripts',
 	'partials'
 ]);
@@ -176,19 +183,16 @@ gulp.task('build', [
 gulp.task('watch', function(){  
     watch([path.watch.css], function(event, cb) {
         gulp.start('css');
-    });   
-    watch([path.watch.js], function(event, cb) {
-        gulp.start('js');
-    });
+    });       
     watch([path.watch.scripts], function(event, cb) {
         gulp.start('scripts');
     });
-//    watch([path.watch.uploads], function(event, cb) {
-//        gulp.start('uploads:build');
-//    });
-//    watch([path.watch.fonts], function(event, cb) {
-//        gulp.start('fonts:build');
-//    });    
+    watch([path.watch.partials], function(event, cb) {
+        gulp.start('partials');
+    });
+    watch([path.watch.fonts], function(event, cb) {
+        gulp.start('fonts');
+    });   
 });
 
-gulp.task('default', ['build', 'webserver', 'watch', 'css', 'libs']);
+gulp.task('default', ['build', 'start', 'watch', 'css', 'libs']);

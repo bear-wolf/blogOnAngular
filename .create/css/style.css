@@ -150,7 +150,9 @@ margin-top: 0;
 }
 
 .table th{ width: 50px;}
+.table .width230 { width: 230px;}
 .table .width200 { width: 200px;}
+.table .width150 { width: 150px;}
 .table .width100 { width: 100px;}
 
 .table td:last-child{ width: 100px;}

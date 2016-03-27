@@ -10,44 +10,41 @@
     }]);
     
     angular.module('postControllers',[])
-    .controller('postCtrl',['$scope','postService', '$routeParams', '$location','$q', function($scope, postService, $routeParams, $location, $q){
-        debugger;
-        $scope.postsId = $routeParams.postsId;
+    .controller('postsCtrl',['$scope','postService', '$routeParams', '$location','$q' ,'userService', function($scope, postService, $routeParams, $location, $q, userService){        
+        $scope.postId = $routeParams.postsId;
         $scope.link = "posts/";
         
         this.message = null;          
-        $scope.album = this.album;        
+        //$scope.album = this.album;        
         $scope.sort = 'title';
         $scope.reverse = true;
         
-        var promises = [];
-        promises.push(albumGet());
-        promises.push(userService.get());
+        function postGet(){
+            return new postService.getByUserId($scope.model.user.id).then(function(data){                                     
+                return ($scope.postId == undefined) ? data : data[0];            
+        })};
         
+        var promises = [];
+        promises.push(postGet());
+        promises.push(userService.get());
+                
         $q.all(promises).then(function (results) {
-            var albums = results[0];
+            var posts = results[0];
             var user = results[1];
-            for(var i=0; i<albums.length; i++)
+            for(var i=0; i<posts.length; i++)
                 {
                     for(var j = 0; j< user.length; j++)
                     {
-                        if (albums[i].userId == user[j].id) 
+                        if (posts[i].userId == user[j].id) 
                         {
-                            albums[i].userName = user[j].name;
+                            posts[i].userName = user[j].name;
                             break;
                         }
                     }
                 }
-            $scope.albums = albums;
+            $scope.posts = posts;
         });        
         
-        function albumGet()
-        {
-            return new albumService.getByUserId($scope.model.user.id).then(function(data){                                     
-                return ($scope.albumId == undefined) ? data : data[0];            
-            });  
-        }        
-       
         $scope.remove = function(id)
         {
             if (confirm("You confirm removal?"))
@@ -60,8 +57,26 @@
             $scope.sort = current;
           };
     }]) 
-    .controller('postEditCtrl',['$scope','postService', '$routeParams', '$location','$q', function($scope, postService, $routeParams, $location, $q){
-       
+    .controller('postsEditCtrl',['$scope','postService', '$routeParams', '$location','$q', function($scope, postService, $routeParams, $location, $q){        
+        $scope.postId = $routeParams.id;
+        this.post = {
+            id : $routeParams.id,
+            userId : null,
+            title: null          
+        };  
+        
+        new postService.getById(this.post.id).then(function(data){                                                  
+            $scope.post = data;            
+            return $scope.post;
+            });  
+        $scope.save = function(form){                         
+            new postService.save(this.post).then(function(data){                    
+                $scope.message = "Your saving was successfuly";
+                //$location.path("/users");
+            }, function(){ 
+                $scope.message = "This is error during save of user";                    
+            });
+        };
     }])      
     .directive("editposttmpl", function(){
        return {
@@ -76,54 +91,54 @@
     .service('postService', ['$http', '$q','PATH', function($http, $q, PATH){       
                         
         var Post = {
-//                get : function(){
-//                     var deferred = $q.defer();
-//                     $http.get(PATH.photos)              
-//                         .success(function(data, status, headers, config) {
-//                            deferred.resolve(data);
-//                         })
-//                         .error(function(data, status, headers, config) {
-//                            deferred.reject(status);
-//                        });
-//
-//                    return deferred.promise;
-//                },  
-//                getByAlbumId : function(id){
-//                     var deferred = $q.defer();
-//                     $http.get(PATH.photos+"?albumId="+id)              
-//                         .success(function(data, status, headers, config) {
-//                            deferred.resolve(data);
-//                         })
-//                         .error(function(data, status, headers, config) {
-//                            deferred.reject(status);
-//                        });
-//
-//                    return deferred.promise;
-//                },  
-//                getById : function(id){
-//                     var deferred = $q.defer();
-//                     $http.get(PATH.photos+"/"+id)              
-//                         .success(function(data, status, headers, config) {
-//                            deferred.resolve(data);
-//                         })
-//                         .error(function(data, status, headers, config) {
-//                            deferred.reject(status);
-//                        });
-//
-//                    return deferred.promise;
-//                },  
-//                save: function(data){
-//                     var deferred = $q.defer();
-//                     $http.post(PATH.photos, data)              
-//                         .success(function(data, status, headers, config) {
-//                            deferred.resolve(data);
-//                         })
-//                         .error(function(data, status, headers, config) {
-//                            deferred.reject(status);
-//                        });
-//
-//                    return deferred.promise;
-//                },  
+                get : function(){
+                     var deferred = $q.defer();
+                     $http.get(PATH.posts)              
+                         .success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                         })
+                         .error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+
+                    return deferred.promise;
+                },  
+                getByUserId : function(id){
+                     var deferred = $q.defer();
+                     $http.get(PATH.posts+"?userId="+id)              
+                         .success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                         })
+                         .error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+
+                    return deferred.promise;
+                },  
+                getById : function(id){
+                     var deferred = $q.defer();
+                     $http.get(PATH.posts+"/"+id)              
+                         .success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                         })
+                         .error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+
+                    return deferred.promise;
+                },  
+                save: function(data){
+                     var deferred = $q.defer();
+                     $http.post(PATH.posts, data)              
+                         .success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                         })
+                         .error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+
+                    return deferred.promise;
+                }  
             }
             
         return Post; 

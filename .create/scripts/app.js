@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
-                          'globalModules', 'adminModules', 'authModules', 'userModules', 'albumModules', 'photoModules', 'postModules'])
+                          'globalModules', 'adminModules', 'authModules', 'userModules', 'albumModules', 'photoModules', 'postModules', 'commentModules', 'todosModules'])
     .config([ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $location, $httpProvider) {
         //console.log("Configuration appSite");
         $routeProvider
@@ -15,7 +15,14 @@ angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
                     templateUrl: './partials/albums/index.html', 
                     controller: 'albumEditCtrl',
                     access: { requiredAuthentication: true }})          
-          .when('/comments', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/comments', {
+                templateUrl: './partials/comments/index.html',
+                controller: 'commentsCtrl',
+                access: { requiredAuthentication: true }})
+         .when('/comments/:id', {
+                templateUrl: './partials/comments/index.html',
+                controller: 'commentsEditCtrl',
+                access: { requiredAuthentication: true }})
           .when('/photos', {
             templateUrl: './partials/photos/index.html', 
             controller: 'photoCtrl', 
@@ -26,13 +33,20 @@ angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
                 access: { requiredAuthentication: true }})  
           .when('/posts', {
                 templateUrl: './partials/posts/index.html',
-                controller: 'postCtrl',
+                controller: 'postsCtrl',
                 access: { requiredAuthentication: true }})
-        .when('/posts/:id', {
+         .when('/posts/:id', {
                 templateUrl: './partials/posts/index.html',
-                controller: 'postCtrl',
+                controller: 'postsEditCtrl',
                 access: { requiredAuthentication: true }})
-          .when('/todos', {templateUrl: './partials/entity.html', controller: 'entityCtrl', access: { requiredAuthentication: true }})
+          .when('/todos', {
+                templateUrl: './partials/todos/index.html',
+                controller: 'todosCtrl',
+                access: { requiredAuthentication: true }})
+          .when('/todos/:id', {
+                templateUrl: './partials/todos/index.html',
+                controller: 'todosEditCtrl',
+                access: { requiredAuthentication: true }})
           .when('/users/', {   
                     controller:'usersCtrl', 
                     templateUrl: './partials/users/index.html',                

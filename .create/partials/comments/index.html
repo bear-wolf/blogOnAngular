@@ -1,0 +1,65 @@
+<navtmpl></navtmpl>
+
+<editcommenttmpl data-ng-show="commentId != undefined"></editcommenttmpl>
+
+<section class="row section" data-ng-show="commentId == undefined && comments != undefined">                   
+    <div class="container">                   
+        <div class="clearfix block-title">
+              <div class="col-sm-10 item-col">
+                 <div class="title small">
+                     This is list of comments for post
+                     <b>({{postTitle}})</b>                     
+                 </div>                  
+              </div>
+              <div class="col-sm-2 item-col">
+                  <button class="btn btn-primary btn-add">Add</button>           
+              </div>             
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>                    
+                    <td class="width200">
+                        <div class="sortorder" ng-click="sorting('name')" ng-class="{reverse:reverse}">
+                            <span ng-show="sort === 'name'"></span>
+                            name
+                        </div>
+                    </td>                    
+                    <td class="width200">
+                        <div class="sortorder" ng-click="sorting('email')" ng-class="{reverse:reverse}">
+                            <span ng-show="sort === 'email'"></span>
+                            email
+                        </div>
+                    </td>
+                    <td>                        
+                       <div class="sortorder" ng-click="sorting('body')" ng-class="{reverse:reverse}">
+                            <span ng-show="sort === 'body'"></span>
+                            body
+                        </div>                     
+                    </td>                   
+                    <td>operations</td>
+                </tr>
+                <tr>
+                    <th></th>      
+                    <td></td>                              
+                    <td></td>
+                    <td><input type="text" ng-model="bodyFilter" class="text-empty filter" placeholder="search title"></td>                                                                    
+                    <td>Filter</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in comments | filter: bodyFilter | orderBy:sort:reverse track by $index" ng-hide="hide">
+                    <th>{{$index+1}}</th>                                        
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.body}}</td>                    
+                    <td>
+                        <a href="{{link+item.id}}" class="btn-default inline underline">edit</a>
+                        <a href="javascript:void(0)" class="btn-default inline underline" ng-click="remove(item.id)">remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>            
+</section> 

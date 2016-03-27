@@ -14,13 +14,8 @@
         $scope.albumId = $routeParams.albumId;
         $scope.albumTitle = $routeParams.albumTitle;
         $scope.photosId = $routeParams.id;
-        $scope.link = "photos/";
-        //albumName
-        
-        this.message = null;          
-//        $scope.album = this.album;        
-        $scope.sort = 'title';
-        $scope.reverse = true;
+        $scope.link = "photos/";                
+        $scope.message = null;          
         
         var promises = [];
         promises.push(new photoService.getByAlbumId($scope.albumId).then(function(data){
@@ -29,8 +24,7 @@
         
         $q.all(promises).then(function (results) {            
             $scope.photos = results[0];
-        });        
-         
+        });                 
        
         $scope.remove = function(id)
         {
@@ -38,11 +32,7 @@
                 {
                     alert("ok");
                 }
-        }         
-        $scope.sorting = function(current) {
-            $scope.reverse = ($scope.sort === current) ? !$scope.reverse : false;
-            $scope.sort = current;
-          };
+        }  
     }]) 
     .controller('photoEditCtrl',['$scope','photoService', '$routeParams', '$location','$q', function($scope, photoService, $routeParams, $location, $q){
         

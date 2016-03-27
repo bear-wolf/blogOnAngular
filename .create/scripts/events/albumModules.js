@@ -16,9 +16,7 @@
         
         this.message = null;          
         $scope.album = this.album;        
-        $scope.sort = 'title';
-        $scope.reverse = true;
-        
+                
         var promises = [];
         promises.push(albumGet());
         promises.push(userService.get());
@@ -53,11 +51,7 @@
                 {
                     alert("ok");
                 }
-        }         
-        $scope.sorting = function(current) {
-            $scope.reverse = ($scope.sort === current) ? !$scope.reverse : false;
-            $scope.sort = current;
-          };
+        }                
     }])    
     .controller('albumEditCtrl',['$scope','albumService','$routeParams', function($scope, albumService, $routeParams){
         $scope.albumId = $routeParams.albumId;

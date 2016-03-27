@@ -4,11 +4,12 @@
        <div class="message successful" ng-show="message==null ? false : true">{{message}}</div>
                         
         <div class="entity">                                                        
-            <form name="photos" ng-submit="save(photos)">                
-                <input type="hidden" ng-model="photos.id" name="photos.id">               
+            <form name="post" ng-submit="save(post)">                
+                <input type="hidden" ng-model="post.id" name="post.id">               
+                <input type="hidden" ng-model="post.post" name="post.post">               
                 
                 <div class="clearfix"> 
-                    <span class="title small">Edit a photo</span>
+                    <span class="title small">Edit a post</span>
 <!--
                     <div class="row">
                         <div class="col-sm-3 item-col">Album</div>
@@ -19,16 +20,12 @@
 -->
                     <div class="row">
                         <div class="col-sm-3 item-col">title</div>
-                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="photos.title" ng-model="photos.title" placeholder="Input a title"></div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="post.title" ng-model="post.title" placeholder="Input a title"></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-3 item-col">url</div>
-                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="photos.url" ng-model="photos.url" placeholder="Input an url"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3 item-col">thumbnailUrl</div>
-                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="photos.thumbnailUrl" ng-model="photos.thumbnailUrl" placeholder="Input a thumbnailUrl"></div>
-                    </div>
+                        <div class="col-sm-3 item-col">body</div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="post.body" ng-model="post.body" placeholder="Input an url"></div>
+                    </div>                    
                     <div class="row">
                         <div class="col-sm-3 item-col"></div>
                         <div class="col-sm-9 block-btn"><input type="submit" class="btn btn-primary" value="Save"></div>

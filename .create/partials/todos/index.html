@@ -1,14 +1,14 @@
 <navtmpl></navtmpl>
 
-<editphotostmpl data-ng-show="photosId != undefined"></editphotostmpl>
+<edittodostmpl data-ng-show="todoId != undefined"></edittodostmpl>
 
-<section class="row section" data-ng-show="photosId == undefined">                   
+<section class="row section" data-ng-show="todos != undefined">                   
     <div class="container">                   
         <div class="clearfix block-title">
               <div class="col-sm-10 item-col">
                  <div class="title small">
-                     This is list of photos this Album
-                     <b>({{albumTitle}})</b>
+                     This is list of todos this User
+<!--                     <b>({{model.user}})</b>-->
                  </div>                  
               </div>
               <div class="col-sm-2 item-col">
@@ -24,12 +24,9 @@
                             <span ng-show="sort === 'title'"></span>
                             title
                         </div>
-                    </td>
-                    <td>                        
-                        url                        
-                    </td>
+                    </td>                    
                     <td>
-                        thumbnailUrl
+                        completed
                     </td>
                     <td>operations</td>
                 </tr>
@@ -38,16 +35,15 @@
                     <td>
                         <input type="text" ng-model="titleFilter" class="text-empty filter" placeholder="search title">
                     </td>          
-                    <td colspan="2"></td>                                                                    
+                    <td></td>                                                                    
                     <td>Filter</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in photos | filter: titleFilter | orderBy:sort:reverse track by $index" ng-hide="hide">
+                <tr ng-repeat="item in todos | filter: titleFilter | orderBy:sort:reverse track by $index" ng-hide="hide">
                     <th>{{$index+1}}</th>                                        
                     <td>{{item.title}}</td>
-                    <td>{{item.url}}</td>
-                    <td><img src="{{item.thumbnailUrl}}" alt=""></td>
+                    <td>{{item.completed}}</td>
                     <td>
                         <a href="{{link+item.id}}" class="btn-default inline underline">edit</a>
                         <a href="javascript:void(0)" class="btn-default inline underline" ng-click="remove(item.id)">remove</a>

@@ -1,8 +1,8 @@
 <navtmpl></navtmpl>
 
-<editphotostmpl data-ng-show="postsId != undefined"></editphotostmpl>
+<editposttmpl data-ng-show="postId != undefined"></editposttmpl>
 
-<section class="row section" data-ng-show="postsId == undefined">                   
+<section class="row section" data-ng-show="postId == undefined">                   
     <div class="container">                   
         <div class="clearfix block-title">
               <div class="col-sm-10 item-col">
@@ -18,35 +18,41 @@
             <thead>
                 <tr>
                     <th>#</th>                    
-                    <td>
+                    <td class="width150">
                         <div class="sortorder" ng-click="sorting('userName')" ng-class="{reverse:reverse}">
                             <span ng-show="sort === 'userName'"></span>
                             userName
                         </div>
-                    </td>                    
-                    <td>
+                    </td>                
+                    <td class="width100">Comments</td>    
+                    <td class="width230">
                         <div class="sortorder" ng-click="sorting('title')" ng-class="{reverse:reverse}">
                             <span ng-show="sort === 'title'"></span>
                             title
                         </div>
                     </td>
                     <td>                        
-                        body                        
+                        <div class="sortorder" ng-click="sorting('body')" ng-class="{reverse:reverse}">
+                            <span ng-show="sort === 'body'"></span>
+                            body
+                        </div>                      
                     </td>                   
                     <td>operations</td>
                 </tr>
                 <tr>
                     <th></th>      
-                    <td>
-                        <input type="text" ng-model="titleFilter" class="text-empty filter" placeholder="search title">
-                    </td>          
-                    <td colspan="2"></td>                                                                    
+                    <td></td>          
+                    <td></td>          
+                    <td><input type="text" ng-model="titleFilter" class="text-empty filter" placeholder="search title"></td>                                                                    
+                    <td><input type="text" ng-model="bodyFilter" class="text-empty filter" placeholder="search text"></td>                                                                    
                     <td>Filter</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in photos | filter: titleFilter | orderBy:sort:reverse track by $index" ng-hide="hide">
+                <tr ng-repeat="item in posts | filter: titleFilter | filter: bodyFilter | orderBy:sort:reverse track by $index" ng-hide="hide">
                     <th>{{$index+1}}</th>                                        
+                    <td>{{item.userName}}</td>
+                    <td><a href="comments?postId={{item.id}}&postTitle={{item.title}}">Open</a></td>
                     <td>{{item.title}}</td>
                     <td>{{item.body}}</td>                    
                     <td>

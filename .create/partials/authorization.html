@@ -6,11 +6,7 @@
             <li><input type="text" class="text-empty" ng-model="username" required name="username" placeholder="Введіть ім'я"></li>
             <li><input type="email" class="text-empty" ng-model="email" required name="email" placeholder="Введіть e-mail"></li>
             <li><input type="submit" class="btn btn-primary" value="Sign In"></li>
-        </ul>
-        <div class="message" ng-messages="login.username.$error">
-            <div ng-message="number">Should be a number</div>
-            <div ng-message="max">The number is too large.</div>
-        </div>
+        </ul>        
     </form>        
     
     <div class="successfully" ng-show="model.isLogged">
@@ -18,15 +14,3 @@
         <a href="" class="btn btn-primary" ng-click="logout(username)">sign out</a>
     </div>    
 </div>
-
-<!--
-<div class="form pull-right">
-    <form name="demoForm">
-      <input name="amount" type="number" ng-model="amount" max="100">
-      
-       <div ng-messages="demoForm.amount.$error">
-        <div ng-message="number">Should be a number</div>
-        <div ng-message="max">The number is too large.</div>
-      </div>
-    </form>
-</div>-->

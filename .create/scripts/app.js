@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
+angular.module('appSite',['ngRoute', 'ngResource',
                           'globalModules', 'adminModules', 'authModules', 'userModules', 'albumModules', 'photoModules', 'postModules', 'commentModules', 'todosModules'])
     .config([ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $location, $httpProvider) {
         //console.log("Configuration appSite");

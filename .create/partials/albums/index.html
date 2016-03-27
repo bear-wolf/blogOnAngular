@@ -1,0 +1,60 @@
+<navtmpl></navtmpl>
+<editalbumtmpl data-ng-show="albumId != undefined"></editalbumtmpl>
+
+<section class="row section" data-ng-show="albumId == undefined && albums != undefined">                   
+    <div class="container">                   
+        <div class="clearfix block-title">
+              <div class="col-sm-10 item-col">
+                 <div class="title small">
+                    Albums
+                 </div>                  
+              </div>
+              <div class="col-sm-2 item-col">
+                  <a href="/albums/create/" class="btn btn-primary btn-add">Add</a>
+              </div>             
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <td class="width200">
+                        <div class="sortorder" ng-click="sorting('userName')" ng-class="{reverse:reverse}">
+                            <span ng-show="sort === 'userName'"></span>
+                            user
+                        </div>
+                    </td>
+                    <td class="width100">photos</td>
+                    <td>
+                        <div class="sortorder" ng-click="sorting('title')" ng-class="{reverse:reverse}">
+                            <span ng-show="sort === 'title'"></span>
+                            title
+                        </div>
+                    </td>
+                    <td>operations</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>                                                
+                    <td></td>                                                
+                    <td>
+                        <input type="text" ng-model="titleFilter" class="text-empty filter" placeholder="search title">
+                    </td>
+                    <td>Filter</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in albums | filter:titleFilter | orderBy:sort:reverse track by $index" ng-hide="hide">
+                    <th>{{$index+1}}</th>                    
+                    <td>{{item.userName}}</td>
+                    <td><a href="photos?albumId={{item.id}}&albumTitle={{item.title}}">Open</a></td>
+                    <td>{{item.title}}</td>
+                    <td>
+                        <a href="{{link+item.id}}" class="btn-default inline underline">edit</a>
+                        <a href="javascript:void(0)" class="btn-default inline underline" ng-click="remove(item.id)">remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>            
+</section> 

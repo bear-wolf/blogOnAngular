@@ -1,34 +1,32 @@
-#Запуск проекта
-1) Початок
-   npm install
- 
- 2) *Потрібно інсталювати файли через bower
-    $ bower install jquery angular angular-resource angular-route bootstrap jquery-ui growl
+<h1>Blog on angular</h1>
+<h2>Install</h2>
+<pre>
+<code>
+$ npm install  
+$ bower install jquery angular angular-resource angular-route bootstrap jquery-ui
+</code>
+</pre>
+
+<h2>Start</h2>
+<pre>
+<code>        
+$ gulp
+</code>
+or
+<code>        
+$ gulp default
+</code>
+</pre>
+
+<h2>Open links</h2>
+
+<pre>
+<code>        
+http://localhost:9000/
+http://localhost:3000/ (json server )
+</code>
+</pre>
 
 
-<!--
-2) с дебагером
-  node --debug app/index.js
-  cd node-modules\.bin\
-  node-inspector.cmd
--->
-
-  Локальный адрес дебагера  
-  http://127.0.0.1:8080/debug?port=5858
-  
-3) Запуск сервера даних (окремо)
-   json-server server/db.json
- 
- #
-  Будуть доступні наступні url
-  http://localhost:3000/albums 
-  
-  http://localhost:3000/comments
-  http://localhost:3000/photos
-  http://localhost:3000/posts
-  http://localhost:3000/todos
-  http://localhost:3000/users
-
-
-# Примітка
-  * - тимчасово потрібна така необхідність
+<h2>For authorization</h2>
+<p>Login for example: <b>Antonette</b> ( password: <b>Shanna@melissa.tv</b> )</p>

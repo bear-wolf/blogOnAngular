@@ -1,0 +1,39 @@
+<section class="row">
+    <div class="container">
+        
+       <div class="message successful" ng-show="message==null ? false : true">{{message}}</div>
+                        
+        <div class="entity">                                                        
+            <form name="formTodo" ng-submit="save(formTodo)">                
+                <input type="hidden" ng-model="todo.id" name="todo.id">               
+                <input type="hidden" ng-model="todo.userId" name="todo.userId">               
+                
+                <div class="clearfix"> 
+                    <span class="title small">Edit a todo</span>
+<!--
+                    <div class="row">
+                        <div class="col-sm-3 item-col">Album</div>
+                        <div class="col-sm-9 item-col">
+                            <select name="album" ng-model="photos.album" id=""></select>
+                        </div>
+                    </div>                    
+-->
+                    <div class="row">
+                        <div class="col-sm-3 item-col">title</div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="todo.title" ng-model="todo.title" placeholder="Input a title"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 item-col">completed</div>
+                        <div class="col-sm-9 item-col"><input type="checkbox" name="todo.completed" ng-model="todo.completed"></div>
+                    </div>                    
+                    <div class="row">
+                        <div class="col-sm-3 item-col"></div>
+                        <div class="col-sm-9 block-btn"><input type="submit" class="btn btn-primary" value="Save"></div>
+                    </div>
+                </div>
+            </form>
+        
+            <div class="block-btn"><a href="{{linkToBack}}" class="btn btn-default">Back</a></div>        
+        </div>
+    </div>
+</section>

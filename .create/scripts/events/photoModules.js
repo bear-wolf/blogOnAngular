@@ -49,15 +49,13 @@
             $scope.photos = data;            
             return $scope.photos;
             });  
-        $scope.save = function(form){            
-             if(form.$valid) { 
-                new photoService.save(this.photos).then(function(data){                    
-                    $scope.message = "Your saving was successfuly";
-                    //$location.path("/users");
-                }, function(){ 
-                    $scope.message = "This is error during save of user";                    
-                });
-           }
+        $scope.save = function(form){                         
+            new photoService.save(this.photos).then(function(data){                    
+                $scope.message = "Your saving was successfuly";
+                //$location.path("/users");
+            }, function(){ 
+                $scope.message = "This is error during save of user";                    
+            });           
         };
     }])      
     .directive("editphotostmpl", function(){

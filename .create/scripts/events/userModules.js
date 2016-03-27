@@ -45,15 +45,13 @@
             $scope.users = ($scope.userId==undefined) ? data : data[0];            
         });  
         
-        $scope.save = function(form){            
-             if(form.$valid) { 
-                new userService.save(this.users).then(function(data){                    
-                    $scope.message = "Your saving was successfuly";
-                    //$location.path("/users");
-                }, function(){ 
-                    $scope.message = "This is error during save of user";                    
-                });
-           }
+        $scope.save = function(form){                        
+            new userService.save(this.users).then(function(data){                    
+                $scope.message = "Your saving was successfuly";
+                //$location.path("/users");
+            }, function(){ 
+                $scope.message = "This is error during save of user";                    
+            });           
         };
     }])    
     .directive("edittmpl", function(){

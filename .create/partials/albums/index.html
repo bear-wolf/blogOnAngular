@@ -1,5 +1,4 @@
 <navtmpl></navtmpl>
-
 <editalbumtmpl data-ng-show="albumId != undefined"></editalbumtmpl>
 
 <section class="row section" data-ng-show="albumId == undefined && albums != undefined">                   
@@ -11,7 +10,7 @@
                  </div>                  
               </div>
               <div class="col-sm-2 item-col">
-                  <button class="btn btn-primary btn-add">Add</button>           
+                  <a href="/albums/create/" class="btn btn-primary btn-add">Add</a>
               </div>             
         </div>
         <table class="table table-bordered table-striped">
@@ -24,7 +23,7 @@
                             user
                         </div>
                     </td>
-                    <td class="width100">Photos</td>
+                    <td class="width100">photos</td>
                     <td>
                         <div class="sortorder" ng-click="sorting('title')" ng-class="{reverse:reverse}">
                             <span ng-show="sort === 'title'"></span>

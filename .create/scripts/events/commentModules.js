@@ -37,15 +37,13 @@
             return $scope.comment;
             });  
         
-        $scope.save = function(form){            
-             if(form.$valid) { 
-                new commentService.save(this.comment).then(function(data){                    
-                    $scope.message = "Your saving was successfuly";
-                    //$location.path("/comment");
-                }, function(){ 
-                    $scope.message = "This is error during save of user";                    
-                });
-           }
+        $scope.save = function(form){                         
+            new commentService.save(this.comment).then(function(data){                    
+                $scope.message = "Your saving was successfuly";
+                //$location.path("/comment");
+            }, function(){ 
+                $scope.message = "This is error during save of user";                    
+            });
         };
     }])
     .directive("editcommenttmpl", function(){

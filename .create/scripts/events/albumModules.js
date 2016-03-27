@@ -51,7 +51,7 @@
                 {
                     alert("ok");
                 }
-        }                
+        }            
     }])    
     .controller('albumEditCtrl',['$scope','albumService','$routeParams', function($scope, albumService, $routeParams){
         $scope.albumId = $routeParams.albumId;
@@ -76,6 +76,22 @@
            }
         };
     }])
+    .controller("albumCreateCtrl", [ '$scope','$location', 'albumService', function($scope, $location, albumService){
+         $scope.save = function(form){            
+             if(confirm("Create an album?")) { 
+                new albumService.save(this.albums).then(function(data){                    
+                    $scope.message = "Your saving was successfuly";
+                    //$location.path("/users");
+                }, function(){ 
+                    $scope.message = "This is error during save of user";                    
+                });
+           }
+             else
+             {
+                 $location.path("/album");
+             }
+        };
+    }])
     .directive("editalbumtmpl", function(){
        return {
            templateUrl: "partials/albums/edit.html",
@@ -83,15 +99,8 @@
                $scope.linkToBack = "albums/"
            }
        } 
-    })
-    .directive("selectalbumtmpl", function(){
-       return {
-           templateUrl: "partials/albums/select.html",
-           link : function($scope, element, attributes) {               
-               $scope.linkToBack = "albums/"
-           }
-       } 
     });
+   
             
     angular.module('albumServices',['constModules'])
     .service('albumService',['$http', '$q','PATH', function($http, $q, PATH){       

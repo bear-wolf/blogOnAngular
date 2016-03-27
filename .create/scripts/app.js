@@ -7,14 +7,9 @@ angular.module('appSite',['ngRoute', 'ngMessages', 'ngResource',
         $routeProvider
           .when('/', { templateUrl: './partials/main.html',controller: 'AdminCtrl'})
           .when('/login', { templateUrl: './partials/login.html', controller: 'authCtrl'})
-          .when('/albums', { 
-                    templateUrl: './partials/albums/index.html', 
-                    controller: 'albumCtrl',
-                    access: { requiredAuthentication: true }})    
-          .when('/albums/:albumId', { 
-                    templateUrl: './partials/albums/index.html', 
-                    controller: 'albumEditCtrl',
-                    access: { requiredAuthentication: true }})          
+          .when('/albums', { templateUrl: './partials/albums/index.html', controller: 'albumCtrl',access: { requiredAuthentication: true }})              
+          .when('/albums/create/', { templateUrl: './partials/albums/create.html', controller: 'albumCreateCtrl',access: { requiredAuthentication: true }})          
+          .when('/albums/:albumId', { templateUrl: './partials/albums/index.html', controller: 'albumEditCtrl',access: { requiredAuthentication: true }})          
           .when('/comments', {
                 templateUrl: './partials/comments/index.html',
                 controller: 'commentsCtrl',

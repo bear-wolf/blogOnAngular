@@ -3,7 +3,8 @@
 <pre>
 <code>
 $ npm install  
-$ bower install jquery angular angular-resource angular-route bootstrap jquery-ui
+$ bower install jquery angular angular-resource angular-route angular-file-upload bootstrap jquery-ui 
+
 </code>
 </pre>
 

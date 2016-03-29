@@ -10,21 +10,27 @@
     }]);
     
     angular.module('photoControllers',[])
-    .controller('photoCtrl',['$scope','photoService', '$routeParams', '$location','$q', function($scope, photoService, $routeParams, $location, $q){
+    .controller('photoCtrl',['$scope','todoService', '$routeParams', '$location','$q', function($scope, todoService, $routeParams, $location, $q){
         $scope.albumId = $routeParams.albumId;
         $scope.albumTitle = $routeParams.albumTitle;
         $scope.photosId = $routeParams.id;
         $scope.link = "photos/";                
         $scope.message = null;          
         
-        var promises = [];
-        promises.push(new photoService.getByAlbumId($scope.albumId).then(function(data){
-             return ($scope.photosId == undefined) ? data : data[0];          
-        }));
+//        var promises = [];
+//        promises.push(getPhoto());
+                
+//          new photoService.getByAlbumId($scope.albumId).then(function(data){
+//                $scope.photos = ($scope.photosId == undefined) ? data : data[0];                          
+//            });        
+        var temp = todoService.getByUserId($scope.model.user.id).then(function(data){            
+                $scope.photos = ($scope.photosId == undefined) ? data : data[0];                          
+            });  
+              
         
-        $q.all(promises).then(function (results) {            
-            $scope.photos = results[0];
-        });                 
+//        $q.all(promises).then(function (results) {            
+//            $scope.photos = results[0];
+//        });                 
        
         $scope.remove = function(id)
         {

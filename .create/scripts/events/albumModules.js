@@ -55,15 +55,15 @@
     }])    
     .controller('albumEditCtrl',['$scope','albumService','$routeParams', function($scope, albumService, $routeParams){
         $scope.albumId = $routeParams.albumId;
-        this.albums = {
+        $scope.titleFilter = ["ntext"];        
+        $scope.albums = [{
             id : null,
             userId : null,
             title: null          
-        };  
+        }];  
         
         new albumService.getById($routeParams.albumId).then(function(data){                                     
-            $scope.albums = data[0];            
-            return $scope.albums;
+            $scope.albums[0] = data[0];                        
             });  
         $scope.save = function(form){                         
             new albumService.save(this.albums).then(function(data){                    
@@ -74,7 +74,7 @@
             });           
         };
     }])
-    .controller("albumCreateCtrl", [ '$scope','$location', 'albumService', function($scope, $location, albumService){
+    .controller("albumCreateCtrl", [ '$scope','$location', 'albumService', function($scope, $location, albumService){        
          $scope.save = function(form){            
              if(confirm("Create an album?")) { 
                 new albumService.save(this.albums).then(function(data){                    

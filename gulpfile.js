@@ -34,6 +34,7 @@ var file ={
         './bower_components/growl/javascripts/jquery.growl.js',
         './bower_components/angular-resource/angular-resource.min.js',
         './bower_components/angular-route/angular-route.min.js',
+        './bower_components/angular-file-upload/dist/angular-file-upload.min.js',
         './bower_components/angular-messages/angular-messages.min.js'
     ],
     css: [

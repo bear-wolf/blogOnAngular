@@ -5,15 +5,15 @@
                         
         <div class="entity">                                                        
             <form name="album" ng-submit="save(album)">
-                <input type="hidden" ng-model="albums.userId" name="albums.userId">               
-                <input type="hidden" ng-model="albums.id" name="albums.id">               
+                <input type="hidden" ng-model="albums[0].userId" name="albums.userId">               
+                <input type="hidden" ng-model="albums[0].id" name="albums.id">               
                 
                 <div class="clearfix"> 
                     <span class="title small">Edit album</span>
 
                     <div class="row">
                         <div class="col-sm-3 item-col">title</div>
-                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="albums.title" ng-model="albums.title" placeholder="Input a title"></div>
+                        <div class="col-sm-9 item-col"><input type="text" class="text-empty" name="albums.title" ng-model="albums[0].title" placeholder="Input a title"></div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3 item-col"></div>

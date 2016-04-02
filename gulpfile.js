@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     gulpSequence = require('gulp-sequence'),
     browserSync = require("browser-sync"),
     jsonServer = require("gulp-json-srv"),
-    reload = browserSync.reload;
+    reload = browserSync.reload,
+    php = require('gulp-connect-php');
     
 
 var concatConfig = {
@@ -180,6 +181,9 @@ gulp.task('build', [
 	'partials'
 ]);
 
+gulp.task('connect', function() {
+	php.server();
+});
 
 gulp.task('watch', function(){  
     watch([path.watch.css], function(event, cb) {
@@ -196,4 +200,10 @@ gulp.task('watch', function(){
     });   
 });
 
-gulp.task('default', ['build', 'start', 'watch', 'css', 'libs']);
+//gulp.task('default', ['build', 'start', 'watch', 'css', 'libs']);
+
+gulp.task('connect', function() {
+    php.server();
+});
+
+gulp.task('default', ['connect']);

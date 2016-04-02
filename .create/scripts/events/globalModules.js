@@ -14,7 +14,9 @@
             tables : ['albums',
                       'posts', 
                       'todos',
-                      'users'],
+                      'users',
+                      'photos'
+                     ],
             user: null,
             isLogged:false
         };

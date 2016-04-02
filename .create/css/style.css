@@ -147,7 +147,7 @@ margin-top: 0;
     transition: 1s ease;
 }
 
-.entity{ max-width: 600px;}
+.entity{ max-width: 1024px;}
 .entity .text-empty{ margin-bottom: 5px;}
 .entity .item-col{ line-height: 45px;}
 .entity .item-col:first-child{

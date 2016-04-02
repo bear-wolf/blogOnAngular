@@ -10,7 +10,7 @@
     }]);
     
     angular.module('photoControllers',[])
-    .controller('photoCtrl',['$scope','todoService', '$routeParams', '$location','$q', function($scope, todoService, $routeParams, $location, $q){
+    .controller('photoCtrl',['$scope','photoService', '$routeParams', '$location','$q', function($scope, photoService, $routeParams, $location, $q){
         $scope.albumId = $routeParams.albumId;
         $scope.albumTitle = $routeParams.albumTitle;
         $scope.photosId = $routeParams.id;
@@ -20,13 +20,9 @@
 //        var promises = [];
 //        promises.push(getPhoto());
                 
-//          new photoService.getByAlbumId($scope.albumId).then(function(data){
-//                $scope.photos = ($scope.photosId == undefined) ? data : data[0];                          
-//            });        
-        var temp = todoService.getByUserId($scope.model.user.id).then(function(data){            
+          new photoService.getByAlbumId($scope.albumId).then(function(data){
                 $scope.photos = ($scope.photosId == undefined) ? data : data[0];                          
-            });  
-              
+            });
         
 //        $q.all(promises).then(function (results) {            
 //            $scope.photos = results[0];
@@ -43,7 +39,7 @@
     .controller('photoEditCtrl',['$scope','photoService', '$routeParams', '$location','$q', function($scope, photoService, $routeParams, $location, $q){
         
         $scope.photosId = $routeParams.id;
-        this.photos = {
+        this.photo = {
              albumId: null,
              id: null,
              title: null,
@@ -52,9 +48,8 @@
         };  
         
         new photoService.getById($routeParams.id).then(function(data){                                     
-            $scope.photos = data;            
-            return $scope.photos;
-            });  
+            $scope.photo = data;            
+        });  
         $scope.save = function(form){                         
             new photoService.save(this.photos).then(function(data){                    
                 $scope.message = "Your saving was successfuly";

@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     browserSync = require("browser-sync"),
     jsonServer = require("gulp-json-srv"),
     reload = browserSync.reload,
+    livereload = require('gulp-livereload'),
     php = require('gulp-connect-php');
     
 
@@ -143,30 +144,12 @@ gulp.task('fonts', function () {
 
 
 gulp.task('libs', function () {    
-//    var str = "";
-//    for (var i=0; i<fileToSite.js.length; i++ )
-//        {
-//            str += "'"+fileToSite.js[i]+"'";
-//            if (i+1< fileToSite.js.length) str += ","
-//        }    
-    //str = "["+str+"]";
     gulp.src([ file.js[0], file.js[1], file.js[2], file.js[3], file.js[4], file.js[5], file.js[6], file.js[7] ])    
         .pipe(gulp.dest(path.create.outLib))
         .pipe(gulp.dest(path.production.libs)) 
         .pipe(reload({stream: true})); //И перезагрузим наш сервер для обновлений
 });
                      
-                     
-gulp.task('webserver', function () {
-    browserSync(config);
-});
-
-gulp.task('start', ['webserver'], function () {
-    jsonServer.start({ data: './.create/data/db.json', port: 3000});
-    browserSync({host: 'localhost', port: 3000});
-});
-
-
 gulp.task('uploads', function () {
     gulp.src(path.create.uploads)
         .pipe(imagemin({ progressive: true, svgoPlugins: [{removeViewBox: false}],use: [pngquant()], interlaced: true}))
@@ -200,10 +183,23 @@ gulp.task('watch', function(){
     });   
 });
 
-//gulp.task('default', ['build', 'start', 'watch', 'css', 'libs']);
-
-gulp.task('connect', function() {
-    php.server();
+gulp.task('start', function () {
+    jsonServer.start({ data: './.create/data/db.json', port: 3000});
+    browserSync([
+            {host: 'localhost', port: 3000},
+            {host: 'localhost', port: 8000}
+    ]);
 });
 
-gulp.task('default', ['connect']);
+gulp.task('connect', ['start'], function() {
+  php.server({
+    hostname: 'localhost',
+    bin: 'C:/php/php.exe',
+    ini: 'C:/php/php.ini',
+    port: 8000,
+    base: '.production',
+    livereload: true
+  });
+});
+
+gulp.task('default', ['connect', 'build', 'watch', 'css', 'libs']);

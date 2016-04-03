@@ -159,7 +159,7 @@ margin-top: 0;
 .table .width200 { width: 200px;}
 .table .width150 { width: 150px;}
 .table .width100 { width: 100px;}
-.table td:last-child{ width: 110px;}
+.table td:last-child{ width: 125px;}
 
 .table td:last-child a:hover{
     background-color: transparent;

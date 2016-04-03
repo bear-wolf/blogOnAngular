@@ -1,13 +1,13 @@
 (function(angular){
     'use strict';
-angular.module('fileUploadModule', ['angularFileUpload'])
+angular.module('fileUploadModule', ['angularFileUpload', 'constModules'])
     .config([function(){
         //console.log("fileUploadModule :: config");
     }])
     .run([function(){
         //console.log("fileUploadModule :: running");
     }])
-    .controller('fileUploadCtrl', ['$scope', 'FileUploader', function($scope, FileUploader) {
+    .controller('fileUploadCtrl', ['$scope', 'FileUploader','fileUploadService', function($scope, FileUploader, fileUploadService) {
         var uploader = $scope.uploader = new FileUploader({
             url: 'back-end/upload.php'
         });
@@ -21,8 +21,13 @@ angular.module('fileUploadModule', ['angularFileUpload'])
             }
         });
 
+        uploader.remove = function(data){            
+            fileUploadService.remove(data,false).then(function(){
+                console.log("remove");
+            });
+        };
+        
         // CALLBACKS
-
         uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
             console.info('onWhenAddingFileFailed', item, filter, options);
         };
@@ -58,6 +63,31 @@ angular.module('fileUploadModule', ['angularFileUpload'])
         };
 
         console.info('uploader', uploader);
+    }])
+    .service("fileUploadService",['$http', 'PATH', '$q', function($http, PATH, $q){
+        
+        var obj = {
+            remove: function(name, album){
+              var deferred = $q.defer();
+              var data = {
+                  file: name,
+                  status: {                      
+                    remove: true,
+                    album : album
+                  },
+              };                                                                    
+              $http.post(PATH.upload, data)
+                .success(function(data, status, headers, config) {
+                    deferred.resolve(data);
+                 })
+                 .error(function(data, status, headers, config) {
+                    deferred.reject(status);
+                });
+              return deferred.promise;
+            }
+        };
+        
+        return obj;
     }]);
     
 })(window.angular);
